@@ -20,5 +20,5 @@ Explainify is a Visual Studio Code extension for exploring vulnerabilities inter
 1. Clone or download the extension repository:
 
 ```bash
-git clone <your-repo-url>
-cd <your-extension-folder>
+git clone explainify
+cd explainify
