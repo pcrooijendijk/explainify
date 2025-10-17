@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src data: https:; script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:; style-src 'unsafe-inline' vscode-resource:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CWE Vulnerability Explanation</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        padding: 16px;
+        background-color: #1e1e1e;
+        color: #d4d4d4;
+    }
+    h2 {
+        color: #d4d4d4;
+    }
+    .repo {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #333;
+    }
+    .repo h3 {
+        color: #569cd6;
+        margin-bottom: 8px;
+    }
+    .explanation {
+        background-color: #252526;
+        color: #d4d4d4;
+        padding: 10px;
+        border-left: 3px solid #d7ba7d;
+        margin-bottom: 8px;
+        white-space: pre-wrap;
+        border-radius: 3px;
+    }
+    .entry {
+        background-color: #2d2d2d;
+        padding: 8px;
+        margin: 6px 0;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .entry:hover {
+        background-color: #373737;
+    }
+    .snippet {
+        font-family: monospace;
+        background-color: #1e1e1e;
+        color: #dcdcaa;
+        padding: 6px;
+        margin-top: 4px;
+        border-left: 2px solid #d7ba7d;
+        overflow-x: auto;
+        white-space: pre;
+        border-radius: 2px;
+    }
+    .meta {
+        font-size: 0.9em;
+        color: #9cdcfe;
+    }
+</style>
+</head>
+<body>
+<h2>CWE Vulnerability Explanation</h2>
+<div id="list">Loading...</div>
+
+<script>
+const vscode = acquireVsCodeApi();
+
+window.addEventListener('message', event => {
+    if(event.data.command === 'setData') render(event.data.payload);
+});
+
+vscode.postMessage({ command: 'requestData' });
+
+function render(payload) {
+    const { entries, repoExplanations } = payload;
+    const list = document.getElementById('list');
+    if (!entries.length) { list.innerHTML = '<i>No entries found.</i>'; return; }
+
+    const grouped = {};
+    for (const it of entries) (grouped[it.repo] = grouped[it.repo] || []).push(it);
+
+    list.innerHTML = '';
+    for (const repo of Object.keys(grouped)) {
+        const wrap = document.createElement('div');
+        wrap.className = 'repo';
+
+        const h = document.createElement('h3');
+        h.textContent = repo;
+        wrap.appendChild(h);
+
+        const exp = repoExplanations[repo.toLowerCase()];
+        if (exp) {
+            const exDiv = document.createElement('div');
+            exDiv.className = 'explanation';
+            exDiv.innerHTML = exp.explanation + (exp.commit_message ? `\n\n<br><b>Original Commit</b>: ${exp.commit_message}` : '');
+            wrap.appendChild(exDiv);
+        }
+
+        const entries = grouped[repo];
+        entries.sort((a, b) => a.file.localeCompare(b.file) || a.startLine - b.startLine);
+
+        let currentFile = null;
+        let groupSnippetLines = [];
+        let groupStartLine = 0;
+        let groupEndLine = 0;
+
+        const flushSnippet = () => {
+            if (groupSnippetLines.length === 0) return;
+            const entryElement = document.createElement('div');
+            entryElement.className = 'entry';
+
+            const payload = {
+                repo: repo,
+                file: currentFile,
+                startLine: groupStartLine,
+                endLine: groupEndLine
+            };
+
+            entryElement.onclick = () => {
+                vscode.postMessage({ command: 'openFile', payload: payload });
+            };
+
+            const meta = document.createElement('div');
+            meta.className = 'meta';
+            meta.textContent = `${currentFile} [Lines ${groupStartLine + 1}-${groupEndLine + 1}]`;
+            entryElement.appendChild(meta);
+
+            const snippet = document.createElement('div');
+            snippet.className = 'snippet';
+            snippet.textContent = groupSnippetLines.join('\n');
+            entryElement.appendChild(snippet);
+
+            wrap.appendChild(entryElement);
+
+            groupSnippetLines = [];
+        };
+
+        for (const entry of entries) {
+            if (entry.file !== currentFile) {
+                flushSnippet();
+                currentFile = entry.file;
+                groupStartLine = entry.startLine;
+            }
+            groupSnippetLines.push(entry.snippet);
+            groupEndLine = entry.endLine;
+        }
+
+        flushSnippet();
+        list.appendChild(wrap);
+    }
+}
+</script>
+</body>
+</html>
