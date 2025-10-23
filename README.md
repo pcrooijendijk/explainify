@@ -28,10 +28,15 @@ git clone explainify
 cd explainify
 ```
 
-1.  Run the bash script for executing the steps as mentioned before:
+2. Install the requirements:
 
 ```
 pip install -r requirements.txt
+```
+
+3.  Run the bash script for executing the steps as mentioned before:
+
+```
 ./job.sh
 ```
 
