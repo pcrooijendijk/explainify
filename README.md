@@ -11,10 +11,44 @@
 
 ## Requirements
 
-For running this project, Ollama is required, which can be installed using the steps from \[Ollama\]([https://github.com/ollama/ollama?tab=readme-ov-file](https://github.com/ollama/ollama?tab=readme-ov-file)). Download Ollama for your OS and pull  `mistral:7b` with: 
+For running this project, Ollama is required, which can be installed using the steps from [Ollama]([https://github.com/ollama/ollama?tab=readme-ov-file](https://github.com/ollama/ollama?tab=readme-ov-file)). Download Ollama for your OS and pull  `mistral:7b` with: 
 
 ```
 ollama pull mistral:7b
+```
+
+Then for getting the relevant lines of code from the vulnerable code files, [SemGrep](https://semgrep.dev) and [Snyk](https://snyk.io/platform/snyk-cli/) are used. To install them please refer to the documentation of [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) and [Snyk](https://docs.snyk.io/developer-tools/snyk-cli/install-or-update-the-snyk-cli) or use: 
+
+- Semgrep
+```
+# Install through homebrew for macOS
+brew install semgrep
+
+# Install through pip
+python3 -m pip install semgrep
+
+# Confirm installation succeeded by printing the currently installed version
+semgrep --version
+
+# Login to semgrep 
+semgrep login
+```
+
+- Snyk
+```
+npm install snyk -g
+```
+
+Then use the following to start the scanning process for your vulnerable files: 
+- Semgrep
+```
+semgrep scan --verbose --no-git-ignore --json --output results/semgrep_results.json
+```
+
+- Snyk
+```
+cd file_downloads/
+snyk code test --all-projects --json-file-output=vuln.json
 ```
 
 ---
