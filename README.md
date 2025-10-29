@@ -19,7 +19,7 @@ ollama pull mistral:7b
 
 Then for getting the relevant lines of code from the vulnerable code files, [SemGrep](https://semgrep.dev) and [Snyk](https://snyk.io/platform/snyk-cli/) are used. To install them please refer to the documentation of [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) and [Snyk](https://docs.snyk.io/developer-tools/snyk-cli/install-or-update-the-snyk-cli) or use: 
 
-- Semgrep
+### Semgrep
 ```
 # Install through homebrew for macOS
 brew install semgrep
@@ -34,18 +34,18 @@ semgrep --version
 semgrep login
 ```
 
-- Snyk
+### Snyk
 ```
 npm install snyk -g
 ```
 
 Then use the following to start the scanning process for your vulnerable files: 
-- Semgrep
+### Semgrep
 ```
 semgrep scan --verbose --no-git-ignore --json --output results/semgrep_results.json
 ```
 
-- Snyk
+### Snyk
 ```
 cd file_downloads/
 snyk code test --all-projects --json-file-output=vuln.json
