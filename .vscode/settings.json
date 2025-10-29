@@ -1,0 +1,4 @@
+{
+    "semgrep.scan.onlyGitDirty": false,
+    "codeQL.createQuery.qlPackLocation": "/Users/prooijendijk/Documents/explainify"
+}

@@ -11,7 +11,7 @@ DATASET_CSV = "./vader.csv"
 CASES_DIR = "cases"
 MODEL_NAME = "mistral:7b"
 
-# Prompt templates
+# Prompt template
 SYSTEM_TEMPLATE = """
 Each commit includes:
 - CVE ID(s)
@@ -77,14 +77,15 @@ def call_mistral(system_prompt: str, user_prompt: str) -> str:
 def main():
     path_to_patches = "./patch_data/"
 
-    with open("./results/lines_semgrep.json", "r") as f: 
-        relevant_lines = json.load(f)
+    # Getting the results from the comparison between Snyk and Semgrep
+    with open("./results/comparison.json", "r") as f: 
+        relevant_lines = json.load(f)['agreements']
 
     explanations = {}
     
     for file in relevant_lines:
         # Open the patch data
-        with open(path_to_patches + file + "_patch.json", "r") as f: 
+        with open(path_to_patches + file['owner'] + "_patch.json", "r") as f: 
             patch_file = json.load(f)
 
         patch_file = patch_file[next(iter(patch_file))]
@@ -95,16 +96,17 @@ def main():
             cwe_id=cwe_id,
             cve_ids=["cve_id"][0],
             repo=patch_file["repo"],
-            # commit_hash=patch_file["file"]["sha"],
-            # commit_message=patch_file["message"],
-            diff=relevant_lines[file]["patches"],
-            lines=relevant_lines[file]["lines"]
+            commit_hash=patch_file["file"]["sha"],
+            commit_message=patch_file["message"],
+            diff=file["diff"],
+            lines=file["semgrep_findings"][0]["code_snippet"] # Getting the agreed lines of code from the Semgrep analysis
         )
 
-        explanations[file] = {
+        explanations[file["owner"]] = {
             "explanation": call_mistral(system_prompt, user_prompt).lstrip(),
             "CWE-id": cwe_id,
             "commit_message": patch_file["message"],
+            "diff": str(file["diff"])
         }
 
     with open("./results/explanations.json", "w") as f: 

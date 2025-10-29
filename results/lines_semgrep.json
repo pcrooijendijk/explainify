@@ -1,34 +1,1008 @@
 {
-    "DataTables": {
-        "path": "file_downloads/DataTables/old/examples.php",
-        "lines": "echo htmlspecialchars( file_get_contents( '../server_side/'.$_POST['src'] ) );",
-        "message_semgrep": "File name based on user input risks server-side request forgery.",
-        "patches": [
-            "@@ -1,6 +1,6 @@\n <?php\n \n-if ( isset( $_POST['src'] ) && preg_match( '/scripts\\/[a-zA-Z_\\-_]+\\.php/', $_POST['src'] ) !== 0 ) {\n+if ( isset( $_POST['src'] ) && preg_match( '/^scripts\\/[a-zA-Z_\\-_]+\\.php$/', $_POST['src'] ) !== 0 ) {\n \techo htmlspecialchars( file_get_contents( '../server_side/'.$_POST['src'] ) );\n }\n else {"
-        ]
-    },
-    "KnowageLabs": {
-        "path": "file_downloads/KnowageLabs/old/MetaService.java",
-        "lines": "} catch (Throwable t) {",
-        "message_semgrep": "Possible active debug code detected. Deploying an application with debug code can create unintended entry points or expose sensitive information.",
-        "patches": [
-            "@@ -110,6 +110,7 @@\n import it.eng.knowage.meta.model.physical.PhysicalTable;\n import it.eng.knowage.meta.model.serializer.EmfXmiSerializer;\n import it.eng.knowage.meta.model.serializer.ModelPropertyFactory;\n+import it.eng.knowage.meta.model.util.JXPathContextBuilder;\n import it.eng.qbe.utility.CustomFunctionsSingleton;\n import it.eng.qbe.utility.CustomizedFunctionsReader;\n import it.eng.qbe.utility.DbTypeThreadLocal;\n@@ -214,7 +215,8 @@ public Response loadSbiModel(@PathParam(\"bmId\") Integer bmId, @Context HttpServl\n \n \t\t\treturn Response.ok(translatedModel.toString()).build();\n \n-\t\t} catch (Throwable t) {\r\t\t\tlogger.error(\"Impossibile to load the model\", t);\n+\t\t} catch (Throwable t) {\n+\t\t\tlogger.error(\"Impossibile to load the model\", t);\n \t\t\tthrow new SpagoBIServiceException(req.getPathInfo(), t);\n \t\t}\n \t}\n@@ -1491,8 +1493,7 @@ private void applyDiff(JSONObject jsonRoot, Model model) throws SpagoBIException\n \tprivate void applyPatch(JsonNode patch, Model model) throws SpagoBIException {\n \t\tlogger.debug(\"applyPatch:\" + patch != null ? patch.toString() : \"null\");\n \t\tIterator<JsonNode> elements = patch.elements();\n-\t\tJXPathContext context = JXPathContext.newContext(model);\n-\t\tcontext.setFactory(new ModelPropertyFactory());\n+\t\tJXPathContext context = JXPathContextBuilder.newInstance(model).withFactory(new ModelPropertyFactory()).build();\n \t\twhile (elements.hasNext()) {\n \t\t\tJsonNode jsonNode = elements.next();\n \t\t\tString operation = jsonNode.get(\"op\").textValue();"
-        ]
-    },
-    "auth0": {
-        "path": "file_downloads/auth0/new/HttpRequestTest.php",
-        "lines": "@unlink($tempFile);",
-        "message_semgrep": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
-        "patches": [
-            "@@ -176,6 +176,56 @@ function(): HttpRequest {\n     fn() => new HttpRequest($this->configuration, HttpClient::CONTEXT_GENERIC_CLIENT, 'get', '/' . uniqid())\n ]]);\n \n+it('rejects file paths with protocol separators', function(): void {\n+    $client = new HttpRequest($this->configuration, HttpClient::CONTEXT_GENERIC_CLIENT, 'post', '/');\n+    \n+    expect(fn() => $client->addFile('test', 'file:///etc/passwd'))\n+        ->toThrow(\\InvalidArgumentException::class, 'File paths with protocol separators (\"://\") are not allowed: \"file:///etc/passwd\"');\n+        \n+    expect(fn() => $client->addFile('test', 'http://example.com/file.txt'))\n+        ->toThrow(\\InvalidArgumentException::class, 'File paths with protocol separators (\"://\") are not allowed: \"http://example.com/file.txt\"');\n+        \n+    expect(fn() => $client->addFile('test', 'php://filter/convert.base64-encode/resource=/etc/passwd'))\n+        ->toThrow(\\InvalidArgumentException::class, 'File paths with protocol separators (\"://\") are not allowed: \"php://filter/convert.base64-encode/resource=/etc/passwd\"');\n+});\n+\n+it('rejects file paths for non-existent or unreadable files', function(): void {\n+    $client = new HttpRequest($this->configuration, HttpClient::CONTEXT_GENERIC_CLIENT, 'post', '/');\n+    \n+    // Non-existent file\n+    expect(fn() => $client->addFile('test', '/non/existent/file.txt'))\n+        ->toThrow(\\InvalidArgumentException::class, 'The file \"/non/existent/file.txt\" does not exist.');\n+    \n+    // Create a temp file with no read permissions to test unreadable file\n+    $tempFile = sys_get_temp_dir() . '/' . uniqid('auth0_test_');\n+    file_put_contents($tempFile, 'test content');\n+    chmod($tempFile, 0000); // Remove all permissions\n+    \n+    try {\n+        expect(fn() => $client->addFile('test', $tempFile))\n+            ->toThrow(\\InvalidArgumentException::class);\n+    } finally {\n+        chmod($tempFile, 0666); // Restore permissions so we can delete it\n+        @unlink($tempFile);\n+    }\n+});\n+\n+it('allows valid local file paths', function(): void {\n+    $client = new HttpRequest($this->configuration, HttpClient::CONTEXT_GENERIC_CLIENT, 'post', '/');\n+    \n+    // Create a temporary file that exists and is readable\n+    $tempFile = sys_get_temp_dir() . '/' . uniqid('auth0_test_');\n+    file_put_contents($tempFile, 'test content');\n+    \n+    try {\n+        // This should not throw an exception\n+        $result = $client->addFile('test', $tempFile);\n+        expect($result)->toBeInstanceOf(HttpRequest::class);\n+    } finally {\n+        @unlink($tempFile);\n+    }\n+});\n+\n it('throws a NetworkException when the underlying client raises a ClientExceptionInterface', function(HttpRequest $client): void {\n     $client->call();\n })->with(['mocked client' => ["
-        ]
-    },
-    "formbricks": {
-        "path": "file_downloads/formbricks/new/jwt.test.ts",
-        "lines": "TEST_NEXTAUTH_SECRET + mockUser.email",
-        "message_semgrep": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
-        "patches": [
-            "@@ -1,6 +1,7 @@\n-import { env } from \"@/lib/env\";\n+import jwt from \"jsonwebtoken\";\n import { beforeEach, describe, expect, test, vi } from \"vitest\";\n import { prisma } from \"@formbricks/database\";\n+import * as crypto from \"@/lib/crypto\";\n import {\n   createEmailChangeToken,\n   createEmailToken,\n@@ -14,12 +15,69 @@ import {\n   verifyTokenForLinkSurvey,\n } from \"./jwt\";\n \n+const TEST_ENCRYPTION_KEY = \"0\".repeat(32); // 32-byte key for AES-256-GCM\n+const TEST_NEXTAUTH_SECRET = \"test-nextauth-secret\";\n+const DIFFERENT_SECRET = \"different-secret\";\n+\n+// Error message constants\n+const NEXTAUTH_SECRET_ERROR = \"NEXTAUTH_SECRET is not set\";\n+const ENCRYPTION_KEY_ERROR = \"ENCRYPTION_KEY is not set\";\n+\n+// Helper function to test error cases for missing secrets/keys\n+const testMissingSecretsError = async (\n+  testFn: (...args: any[]) => any,\n+  args: any[],\n+  options: {\n+    testNextAuthSecret?: boolean;\n+    testEncryptionKey?: boolean;\n+    isAsync?: boolean;\n+  } = {}\n+) => {\n+  const { testNextAuthSecret = true, testEncryptionKey = true, isAsync = false } = options;\n+\n+  if (testNextAuthSecret) {\n+    const constants = await import(\"@/lib/constants\");\n+    const originalSecret = (constants as any).NEXTAUTH_SECRET;\n+    (constants as any).NEXTAUTH_SECRET = undefined;\n+\n+    if (isAsync) {\n+      await expect(testFn(...args)).rejects.toThrow(NEXTAUTH_SECRET_ERROR);\n+    } else {\n+      expect(() => testFn(...args)).toThrow(NEXTAUTH_SECRET_ERROR);\n+    }\n+\n+    // Restore\n+    (constants as any).NEXTAUTH_SECRET = originalSecret;\n+  }\n+\n+  if (testEncryptionKey) {\n+    const constants = await import(\"@/lib/constants\");\n+    const originalKey = (constants as any).ENCRYPTION_KEY;\n+    (constants as any).ENCRYPTION_KEY = undefined;\n+\n+    if (isAsync) {\n+      await expect(testFn(...args)).rejects.toThrow(ENCRYPTION_KEY_ERROR);\n+    } else {\n+      expect(() => testFn(...args)).toThrow(ENCRYPTION_KEY_ERROR);\n+    }\n+\n+    // Restore\n+    (constants as any).ENCRYPTION_KEY = originalKey;\n+  }\n+};\n+\n // Mock environment variables\n vi.mock(\"@/lib/env\", () => ({\n   env: {\n-    ENCRYPTION_KEY: \"0\".repeat(32), // 32-byte key for AES-256-GCM\n+    ENCRYPTION_KEY: \"0\".repeat(32),\n     NEXTAUTH_SECRET: \"test-nextauth-secret\",\n-  } as typeof env,\n+  },\n+}));\n+\n+// Mock constants\n+vi.mock(\"@/lib/constants\", () => ({\n+  NEXTAUTH_SECRET: \"test-nextauth-secret\",\n+  ENCRYPTION_KEY: \"0\".repeat(32),\n }));\n \n // Mock prisma\n@@ -31,22 +89,65 @@ vi.mock(\"@formbricks/database\", () => ({\n   },\n }));\n \n-describe(\"JWT Functions\", () => {\n+// Mock logger\n+vi.mock(\"@formbricks/logger\", () => ({\n+  logger: {\n+    error: vi.fn(),\n+    warn: vi.fn(),\n+    info: vi.fn(),\n+  },\n+}));\n+\n+describe(\"JWT Functions - Comprehensive Security Tests\", () => {\n   const mockUser = {\n     id: \"test-user-id\",\n     email: \"test@example.com\",\n   };\n \n+  let mockSymmetricEncrypt: any;\n+  let mockSymmetricDecrypt: any;\n+\n   beforeEach(() => {\n     vi.clearAllMocks();\n+\n+    // Setup default crypto mocks\n+    mockSymmetricEncrypt = vi\n+      .spyOn(crypto, \"symmetricEncrypt\")\n+      .mockImplementation((text: string) => `encrypted_${text}`);\n+\n+    mockSymmetricDecrypt = vi\n+      .spyOn(crypto, \"symmetricDecrypt\")\n+      .mockImplementation((encryptedText: string) => encryptedText.replace(\"encrypted_\", \"\"));\n+\n     (prisma.user.findUnique as any).mockResolvedValue(mockUser);\n   });\n \n   describe(\"createToken\", () => {\n-    test(\"should create a valid token\", () => {\n-      const token = createToken(mockUser.id, mockUser.email);\n+    test(\"should create a valid token with encrypted user ID\", () => {\n+      const token = createToken(mockUser.id);\n       expect(token).toBeDefined();\n       expect(typeof token).toBe(\"string\");\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.id, TEST_ENCRYPTION_KEY);\n+    });\n+\n+    test(\"should accept custom options\", () => {\n+      const customOptions = { expiresIn: \"1h\" };\n+      const token = createToken(mockUser.id, customOptions);\n+      expect(token).toBeDefined();\n+\n+      // Verify the token contains the expected expiration\n+      const decoded = jwt.decode(token) as any;\n+      expect(decoded.exp).toBeDefined();\n+      expect(decoded.iat).toBeDefined();\n+      // Should expire in approximately 1 hour (3600 seconds)\n+      expect(decoded.exp - decoded.iat).toBe(3600);\n+    });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET is not set\", async () => {\n+      await testMissingSecretsError(createToken, [mockUser.id], {\n+        testNextAuthSecret: true,\n+        testEncryptionKey: false,\n+      });\n     });\n   });\n \n@@ -56,6 +157,18 @@ describe(\"JWT Functions\", () => {\n       const token = createTokenForLinkSurvey(surveyId, mockUser.email);\n       expect(token).toBeDefined();\n       expect(typeof token).toBe(\"string\");\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.email, TEST_ENCRYPTION_KEY);\n+    });\n+\n+    test(\"should include surveyId in payload\", () => {\n+      const surveyId = \"test-survey-id\";\n+      const token = createTokenForLinkSurvey(surveyId, mockUser.email);\n+      const decoded = jwt.decode(token) as any;\n+      expect(decoded.surveyId).toBe(surveyId);\n+    });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(createTokenForLinkSurvey, [\"survey-id\", mockUser.email]);\n     });\n   });\n \n@@ -64,24 +177,30 @@ describe(\"JWT Functions\", () => {\n       const token = createEmailToken(mockUser.email);\n       expect(token).toBeDefined();\n       expect(typeof token).toBe(\"string\");\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.email, TEST_ENCRYPTION_KEY);\n     });\n \n-    test(\"should throw error if NEXTAUTH_SECRET is not set\", () => {\n-      const originalSecret = env.NEXTAUTH_SECRET;\n-      try {\n-        (env as any).NEXTAUTH_SECRET = undefined;\n-        expect(() => createEmailToken(mockUser.email)).toThrow(\"NEXTAUTH_SECRET is not set\");\n-      } finally {\n-        (env as any).NEXTAUTH_SECRET = originalSecret;\n-      }\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(createEmailToken, [mockUser.email]);\n     });\n   });\n \n-  describe(\"getEmailFromEmailToken\", () => {\n-    test(\"should extract email from valid token\", () => {\n-      const token = createEmailToken(mockUser.email);\n-      const extractedEmail = getEmailFromEmailToken(token);\n-      expect(extractedEmail).toBe(mockUser.email);\n+  describe(\"createEmailChangeToken\", () => {\n+    test(\"should create a valid email change token with 1 day expiration\", () => {\n+      const token = createEmailChangeToken(mockUser.id, mockUser.email);\n+      expect(token).toBeDefined();\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.id, TEST_ENCRYPTION_KEY);\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.email, TEST_ENCRYPTION_KEY);\n+\n+      const decoded = jwt.decode(token) as any;\n+      expect(decoded.exp).toBeDefined();\n+      expect(decoded.iat).toBeDefined();\n+      // Should expire in approximately 1 day (86400 seconds)\n+      expect(decoded.exp - decoded.iat).toBe(86400);\n+    });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(createEmailChangeToken, [mockUser.id, mockUser.email]);\n     });\n   });\n \n@@ -91,6 +210,50 @@ describe(\"JWT Functions\", () => {\n       const token = createInviteToken(inviteId, mockUser.email);\n       expect(token).toBeDefined();\n       expect(typeof token).toBe(\"string\");\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(inviteId, TEST_ENCRYPTION_KEY);\n+      expect(mockSymmetricEncrypt).toHaveBeenCalledWith(mockUser.email, TEST_ENCRYPTION_KEY);\n+    });\n+\n+    test(\"should accept custom options\", () => {\n+      const inviteId = \"test-invite-id\";\n+      const customOptions = { expiresIn: \"24h\" };\n+      const token = createInviteToken(inviteId, mockUser.email, customOptions);\n+      expect(token).toBeDefined();\n+\n+      const decoded = jwt.decode(token) as any;\n+      expect(decoded.exp).toBeDefined();\n+      expect(decoded.iat).toBeDefined();\n+      // Should expire in approximately 24 hours (86400 seconds)\n+      expect(decoded.exp - decoded.iat).toBe(86400);\n+    });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(createInviteToken, [\"invite-id\", mockUser.email]);\n+    });\n+  });\n+\n+  describe(\"getEmailFromEmailToken\", () => {\n+    test(\"should extract email from valid token\", () => {\n+      const token = createEmailToken(mockUser.email);\n+      const extractedEmail = getEmailFromEmailToken(token);\n+      expect(extractedEmail).toBe(mockUser.email);\n+      expect(mockSymmetricDecrypt).toHaveBeenCalledWith(`encrypted_${mockUser.email}`, TEST_ENCRYPTION_KEY);\n+    });\n+\n+    test(\"should fall back to original email if decryption fails\", () => {\n+      mockSymmetricDecrypt.mockImplementationOnce(() => {\n+        throw new Error(\"Decryption failed\");\n+      });\n+\n+      // Create token manually with unencrypted email for legacy compatibility\n+      const legacyToken = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);\n+      const extractedEmail = getEmailFromEmailToken(legacyToken);\n+      expect(extractedEmail).toBe(mockUser.email);\n+    });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      const token = jwt.sign({ email: \"test@example.com\" }, TEST_NEXTAUTH_SECRET);\n+      await testMissingSecretsError(getEmailFromEmailToken, [token]);\n     });\n   });\n \n@@ -106,23 +269,194 @@ describe(\"JWT Functions\", () => {\n       const result = verifyTokenForLinkSurvey(\"invalid-token\", \"test-survey-id\");\n       expect(result).toBeNull();\n     });\n+\n+    test(\"should return null if NEXTAUTH_SECRET is not set\", async () => {\n+      const constants = await import(\"@/lib/constants\");\n+      const originalSecret = (constants as any).NEXTAUTH_SECRET;\n+      (constants as any).NEXTAUTH_SECRET = undefined;\n+\n+      const result = verifyTokenForLinkSurvey(\"any-token\", \"test-survey-id\");\n+      expect(result).toBeNull();\n+\n+      // Restore\n+      (constants as any).NEXTAUTH_SECRET = originalSecret;\n+    });\n+\n+    test(\"should return null if surveyId doesn't match\", () => {\n+      const surveyId = \"test-survey-id\";\n+      const differentSurveyId = \"different-survey-id\";\n+      const token = createTokenForLinkSurvey(surveyId, mockUser.email);\n+      const result = verifyTokenForLinkSurvey(token, differentSurveyId);\n+      expect(result).toBeNull();\n+    });\n+\n+    test(\"should return null if email is missing from payload\", () => {\n+      const tokenWithoutEmail = jwt.sign({ surveyId: \"test-survey-id\" }, TEST_NEXTAUTH_SECRET);\n+      const result = verifyTokenForLinkSurvey(tokenWithoutEmail, \"test-survey-id\");\n+      expect(result).toBeNull();\n+    });\n+\n+    test(\"should fall back to original email if decryption fails\", () => {\n+      mockSymmetricDecrypt.mockImplementationOnce(() => {\n+        throw new Error(\"Decryption failed\");\n+      });\n+\n+      // Create legacy token with unencrypted email\n+      const legacyToken = jwt.sign(\n+        {\n+          email: mockUser.email,\n+          surveyId: \"test-survey-id\",\n+        },\n+        TEST_NEXTAUTH_SECRET\n+      );\n+\n+      const result = verifyTokenForLinkSurvey(legacyToken, \"test-survey-id\");\n+      expect(result).toBe(mockUser.email);\n+    });\n+\n+    test(\"should fall back to original email if ENCRYPTION_KEY is not set\", async () => {\n+      const constants = await import(\"@/lib/constants\");\n+      const originalKey = (constants as any).ENCRYPTION_KEY;\n+      (constants as any).ENCRYPTION_KEY = undefined;\n+\n+      // Create a token with unencrypted email (as it would be if ENCRYPTION_KEY was not set during creation)\n+      const token = jwt.sign(\n+        {\n+          email: mockUser.email,\n+          surveyId: \"survey-id\",\n+        },\n+        TEST_NEXTAUTH_SECRET\n+      );\n+\n+      const result = verifyTokenForLinkSurvey(token, \"survey-id\");\n+      expect(result).toBe(mockUser.email);\n+\n+      // Restore\n+      (constants as any).ENCRYPTION_KEY = originalKey;\n+    });\n+\n+    test(\"should verify legacy survey tokens with surveyId-based secret\", async () => {\n+      const surveyId = \"test-survey-id\";\n+\n+      // Create legacy token with old format (NEXTAUTH_SECRET + surveyId)\n+      const legacyToken = jwt.sign({ email: `encrypted_${mockUser.email}` }, TEST_NEXTAUTH_SECRET + surveyId);\n+\n+      const result = verifyTokenForLinkSurvey(legacyToken, surveyId);\n+      expect(result).toBe(mockUser.email);\n+    });\n+\n+    test(\"should reject survey tokens that fail both new and legacy verification\", async () => {\n+      const surveyId = \"test-survey-id\";\n+      const invalidToken = jwt.sign({ email: \"encrypted_test@example.com\" }, \"wrong-secret\");\n+\n+      const result = verifyTokenForLinkSurvey(invalidToken, surveyId);\n+      expect(result).toBeNull();\n+\n+      // Verify error logging\n+      const { logger } = await import(\"@formbricks/logger\");\n+      expect(logger.error).toHaveBeenCalledWith(expect.any(Error), \"Survey link token verification failed\");\n+    });\n+\n+    test(\"should reject legacy survey tokens for wrong survey\", () => {\n+      const correctSurveyId = \"correct-survey-id\";\n+      const wrongSurveyId = \"wrong-survey-id\";\n+\n+      // Create legacy token for one survey\n+      const legacyToken = jwt.sign(\n+        { email: `encrypted_${mockUser.email}` },\n+        TEST_NEXTAUTH_SECRET + correctSurveyId\n+      );\n+\n+      // Try to verify with different survey ID\n+      const result = verifyTokenForLinkSurvey(legacyToken, wrongSurveyId);\n+      expect(result).toBeNull();\n+    });\n   });\n \n   describe(\"verifyToken\", () => {\n     test(\"should verify valid token\", async () => {\n-      const token = createToken(mockUser.id, mockUser.email);\n+      const token = createToken(mockUser.id);\n       const verified = await verifyToken(token);\n       expect(verified).toEqual({\n-        id: mockUser.id,\n+        id: mockUser.id, // Returns the decrypted user ID\n         email: mockUser.email,\n       });\n     });\n \n     test(\"should throw error if user not found\", async () => {\n       (prisma.user.findUnique as any).mockResolvedValue(null);\n-      const token = createToken(mockUser.id, mockUser.email);\n+      const token = createToken(mockUser.id);\n       await expect(verifyToken(token)).rejects.toThrow(\"User not found\");\n     });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET is not set\", async () => {\n+      await testMissingSecretsError(verifyToken, [\"any-token\"], {\n+        testNextAuthSecret: true,\n+        testEncryptionKey: false,\n+        isAsync: true,\n+      });\n+    });\n+\n+    test(\"should throw error for invalid token signature\", async () => {\n+      const invalidToken = jwt.sign({ id: \"test-id\" }, DIFFERENT_SECRET);\n+      await expect(verifyToken(invalidToken)).rejects.toThrow(\"Invalid token\");\n+    });\n+\n+    test(\"should throw error if token payload is missing id\", async () => {\n+      const tokenWithoutId = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);\n+      await expect(verifyToken(tokenWithoutId)).rejects.toThrow(\"Invalid token\");\n+    });\n+\n+    test(\"should return raw id from payload\", async () => {\n+      // Create token with unencrypted id\n+      const token = jwt.sign({ id: mockUser.id }, TEST_NEXTAUTH_SECRET);\n+      const verified = await verifyToken(token);\n+      expect(verified).toEqual({\n+        id: mockUser.id, // Returns the raw ID from payload\n+        email: mockUser.email,\n+      });\n+    });\n+\n+    test(\"should verify legacy tokens with email-based secret\", async () => {\n+      // Create legacy token with old format (NEXTAUTH_SECRET + userEmail)\n+      const legacyToken = jwt.sign({ id: `encrypted_${mockUser.id}` }, TEST_NEXTAUTH_SECRET + mockUser.email);\n+\n+      const verified = await verifyToken(legacyToken);\n+      expect(verified).toEqual({\n+        id: mockUser.id, // Returns the decrypted user ID\n+        email: mockUser.email,\n+      });\n+    });\n+\n+    test(\"should prioritize new tokens over legacy tokens\", async () => {\n+      // Create both new and legacy tokens for the same user\n+      const newToken = createToken(mockUser.id);\n+      const legacyToken = jwt.sign({ id: `encrypted_${mockUser.id}` }, TEST_NEXTAUTH_SECRET + mockUser.email);\n+\n+      // New token should verify without triggering legacy path\n+      const verifiedNew = await verifyToken(newToken);\n+      expect(verifiedNew.id).toBe(mockUser.id); // Returns decrypted user ID\n+\n+      // Legacy token should trigger legacy path\n+      const verifiedLegacy = await verifyToken(legacyToken);\n+      expect(verifiedLegacy.id).toBe(mockUser.id); // Returns decrypted user ID\n+    });\n+\n+    test(\"should reject tokens that fail both new and legacy verification\", async () => {\n+      const invalidToken = jwt.sign({ id: \"encrypted_test-id\" }, \"wrong-secret\");\n+      await expect(verifyToken(invalidToken)).rejects.toThrow(\"Invalid token\");\n+\n+      // Verify both methods were attempted\n+      const { logger } = await import(\"@formbricks/logger\");\n+      expect(logger.error).toHaveBeenCalledWith(\n+        expect.any(Error),\n+        \"Token verification failed with new method\"\n+      );\n+      expect(logger.error).toHaveBeenCalledWith(\n+        expect.any(Error),\n+        \"Token verification failed with legacy method\"\n+      );\n+    });\n   });\n \n   describe(\"verifyInviteToken\", () => {\n@@ -139,6 +473,53 @@ describe(\"JWT Functions\", () => {\n     test(\"should throw error for invalid token\", () => {\n       expect(() => verifyInviteToken(\"invalid-token\")).toThrow(\"Invalid or expired invite token\");\n     });\n+\n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(verifyInviteToken, [\"any-token\"]);\n+    });\n+\n+    test(\"should throw error if inviteId is missing\", () => {\n+      const tokenWithoutInviteId = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);\n+      expect(() => verifyInviteToken(tokenWithoutInviteId)).toThrow(\"Invalid or expired invite token\");\n+    });\n+\n+    test(\"should throw error if email is missing\", () => {\n+      const tokenWithoutEmail = jwt.sign({ inviteId: \"test-invite-id\" }, TEST_NEXTAUTH_SECRET);\n+      expect(() => verifyInviteToken(tokenWithoutEmail)).toThrow(\"Invalid or expired invite token\");\n+    });\n+\n+    test(\"should fall back to original values if decryption fails\", () => {\n+      mockSymmetricDecrypt.mockImplementation(() => {\n+        throw new Error(\"Decryption failed\");\n+      });\n+\n+      const inviteId = \"test-invite-id\";\n+      const legacyToken = jwt.sign(\n+        {\n+          inviteId,\n+          email: mockUser.email,\n+        },\n+        TEST_NEXTAUTH_SECRET\n+      );\n+\n+      const verified = verifyInviteToken(legacyToken);\n+      expect(verified).toEqual({\n+        inviteId,\n+        email: mockUser.email,\n+      });\n+    });\n+\n+    test(\"should throw error for token with wrong signature\", () => {\n+      const invalidToken = jwt.sign(\n+        {\n+          inviteId: \"test-invite-id\",\n+          email: mockUser.email,\n+        },\n+        DIFFERENT_SECRET\n+      );\n+\n+      expect(() => verifyInviteToken(invalidToken)).toThrow(\"Invalid or expired invite token\");\n+    });\n   });\n \n   describe(\"verifyEmailChangeToken\", () => {\n@@ -150,22 +531,478 @@ describe(\"JWT Functions\", () => {\n       expect(result).toEqual({ id: userId, email });\n     });\n \n+    test(\"should throw error if NEXTAUTH_SECRET or ENCRYPTION_KEY is not set\", async () => {\n+      await testMissingSecretsError(verifyEmailChangeToken, [\"any-token\"], { isAsync: true });\n+    });\n+\n     test(\"should throw error if token is invalid or missing fields\", async () => {\n-      // Create a token with missing fields\n-      const jwt = await import(\"jsonwebtoken\");\n-      const token = jwt.sign({ foo: \"bar\" }, env.NEXTAUTH_SECRET as string);\n+      const token = jwt.sign({ foo: \"bar\" }, TEST_NEXTAUTH_SECRET);\n+      await expect(verifyEmailChangeToken(token)).rejects.toThrow(\n+        \"Token is invalid or missing required fields\"\n+      );\n+    });\n+\n+    test(\"should throw error if id is missing\", async () => {\n+      const token = jwt.sign({ email: \"test@example.com\" }, TEST_NEXTAUTH_SECRET);\n+      await expect(verifyEmailChangeToken(token)).rejects.toThrow(\n+        \"Token is invalid or missing required fields\"\n+      );\n+    });\n+\n+    test(\"should throw error if email is missing\", async () => {\n+      const token = jwt.sign({ id: \"test-id\" }, TEST_NEXTAUTH_SECRET);\n       await expect(verifyEmailChangeToken(token)).rejects.toThrow(\n         \"Token is invalid or missing required fields\"\n       );\n     });\n \n     test(\"should return original id/email if decryption fails\", async () => {\n-      // Create a token with non-encrypted id/email\n-      const jwt = await import(\"jsonwebtoken\");\n+      mockSymmetricDecrypt.mockImplementation(() => {\n+        throw new Error(\"Decryption failed\");\n+      });\n+\n       const payload = { id: \"plain-id\", email: \"plain@example.com\" };\n-      const token = jwt.sign(payload, env.NEXTAUTH_SECRET as string);\n+      const token = jwt.sign(payload, TEST_NEXTAUTH_SECRET);\n       const result = await verifyEmailChangeToken(token);\n       expect(result).toEqual(payload);\n     });\n+\n+    test(\"should throw error for token with wrong signature\", async () => {\n+      const invalidToken = jwt.sign(\n+        {\n+          id: \"test-id\",\n+          email: \"test@example.com\",\n+        },\n+        DIFFERENT_SECRET\n+      );\n+\n+      await expect(verifyEmailChangeToken(invalidToken)).rejects.toThrow();\n+    });\n+  });\n+\n+  // SECURITY SCENARIO TESTS\n+  describe(\"Security Scenarios\", () => {\n+    describe(\"Algorithm Confusion Attack Prevention\", () => {\n+      test(\"should reject 'none' algorithm tokens in verifyToken\", async () => {\n+        // Create malicious token with \"none\" algorithm\n+        const maliciousToken =\n+          Buffer.from(\n+            JSON.stringify({\n+              alg: \"none\",\n+              typ: \"JWT\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\" +\n+          Buffer.from(\n+            JSON.stringify({\n+              id: \"encrypted_malicious-id\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\";\n+\n+        await expect(verifyToken(maliciousToken)).rejects.toThrow(\"Invalid token\");\n+      });\n+\n+      test(\"should reject 'none' algorithm tokens in verifyTokenForLinkSurvey\", () => {\n+        const maliciousToken =\n+          Buffer.from(\n+            JSON.stringify({\n+              alg: \"none\",\n+              typ: \"JWT\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\" +\n+          Buffer.from(\n+            JSON.stringify({\n+              email: \"encrypted_attacker@evil.com\",\n+              surveyId: \"test-survey-id\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\";\n+\n+        const result = verifyTokenForLinkSurvey(maliciousToken, \"test-survey-id\");\n+        expect(result).toBeNull();\n+      });\n+\n+      test(\"should reject 'none' algorithm tokens in verifyInviteToken\", () => {\n+        const maliciousToken =\n+          Buffer.from(\n+            JSON.stringify({\n+              alg: \"none\",\n+              typ: \"JWT\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\" +\n+          Buffer.from(\n+            JSON.stringify({\n+              inviteId: \"encrypted_malicious-invite\",\n+              email: \"encrypted_attacker@evil.com\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\";\n+\n+        expect(() => verifyInviteToken(maliciousToken)).toThrow(\"Invalid or expired invite token\");\n+      });\n+\n+      test(\"should reject 'none' algorithm tokens in verifyEmailChangeToken\", async () => {\n+        const maliciousToken =\n+          Buffer.from(\n+            JSON.stringify({\n+              alg: \"none\",\n+              typ: \"JWT\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\" +\n+          Buffer.from(\n+            JSON.stringify({\n+              id: \"encrypted_malicious-id\",\n+              email: \"encrypted_attacker@evil.com\",\n+            })\n+          ).toString(\"base64url\") +\n+          \".\";\n+\n+        await expect(verifyEmailChangeToken(maliciousToken)).rejects.toThrow();\n+      });\n+\n+      test(\"should reject RS256 algorithm tokens (HS256/RS256 confusion)\", async () => {\n+        // Create malicious token with RS256 algorithm header but HS256 signature\n+        const maliciousHeader = Buffer.from(\n+          JSON.stringify({\n+            alg: \"RS256\",\n+            typ: \"JWT\",\n+          })\n+        ).toString(\"base64url\");\n+\n+        const maliciousPayload = Buffer.from(\n+          JSON.stringify({\n+            id: \"encrypted_malicious-id\",\n+          })\n+        ).toString(\"base64url\");\n+\n+        // Create signature using HMAC (as if it were HS256)\n+        const crypto = require(\"crypto\");\n+        const signature = crypto\n+          .createHmac(\"sha256\", TEST_NEXTAUTH_SECRET)\n+          .update(`${maliciousHeader}.${maliciousPayload}`)\n+          .digest(\"base64url\");\n+\n+        const maliciousToken = `${maliciousHeader}.${maliciousPayload}.${signature}`;\n+\n+        await expect(verifyToken(maliciousToken)).rejects.toThrow(\"Invalid token\");\n+      });\n+\n+      test(\"should only accept HS256 algorithm\", async () => {\n+        // Test that other valid algorithms are rejected\n+        const otherAlgorithms = [\"HS384\", \"HS512\", \"RS256\", \"RS384\", \"RS512\", \"ES256\", \"ES384\", \"ES512\"];\n+\n+        for (const alg of otherAlgorithms) {\n+          const maliciousHeader = Buffer.from(\n+            JSON.stringify({\n+              alg,\n+              typ: \"JWT\",\n+            })\n+          ).toString(\"base64url\");\n+\n+          const maliciousPayload = Buffer.from(\n+            JSON.stringify({\n+              id: \"encrypted_test-id\",\n+            })\n+          ).toString(\"base64url\");\n+\n+          const maliciousToken = `${maliciousHeader}.${maliciousPayload}.fake-signature`;\n+\n+          await expect(verifyToken(maliciousToken)).rejects.toThrow(\"Invalid token\");\n+        }\n+      });\n+    });\n+\n+    describe(\"Token Tampering\", () => {\n+      test(\"should reject tokens with modified payload\", async () => {\n+        const token = createToken(mockUser.id);\n+        const [header, payload, signature] = token.split(\".\");\n+\n+        // Modify the payload\n+        const decodedPayload = JSON.parse(Buffer.from(payload, \"base64url\").toString());\n+        decodedPayload.id = \"malicious-id\";\n+        const tamperedPayload = Buffer.from(JSON.stringify(decodedPayload)).toString(\"base64url\");\n+        const tamperedToken = `${header}.${tamperedPayload}.${signature}`;\n+\n+        await expect(verifyToken(tamperedToken)).rejects.toThrow(\"Invalid token\");\n+      });\n+\n+      test(\"should reject tokens with modified signature\", async () => {\n+        const token = createToken(mockUser.id);\n+        const [header, payload] = token.split(\".\");\n+        const tamperedToken = `${header}.${payload}.tamperedsignature`;\n+\n+        await expect(verifyToken(tamperedToken)).rejects.toThrow(\"Invalid token\");\n+      });\n+\n+      test(\"should reject malformed tokens\", async () => {\n+        const malformedTokens = [\n+          \"not.a.jwt\",\n+          \"only.two.parts\",\n+          \"too.many.parts.here.invalid\",\n+          \"\",\n+          \"invalid-base64\",\n+        ];\n+\n+        for (const malformedToken of malformedTokens) {\n+          await expect(verifyToken(malformedToken)).rejects.toThrow();\n+        }\n+      });\n+    });\n+\n+    describe(\"Cross-Survey Token Reuse\", () => {\n+      test(\"should reject survey tokens used for different surveys\", () => {\n+        const surveyId1 = \"survey-1\";\n+        const surveyId2 = \"survey-2\";\n+\n+        const token = createTokenForLinkSurvey(surveyId1, mockUser.email);\n+        const result = verifyTokenForLinkSurvey(token, surveyId2);\n+\n+        expect(result).toBeNull();\n+      });\n+    });\n+\n+    describe(\"Expired Tokens\", () => {\n+      test(\"should reject expired tokens\", async () => {\n+        const expiredToken = jwt.sign(\n+          {\n+            id: \"encrypted_test-id\",\n+            exp: Math.floor(Date.now() / 1000) - 3600, // Expired 1 hour ago\n+          },\n+          TEST_NEXTAUTH_SECRET\n+        );\n+\n+        await expect(verifyToken(expiredToken)).rejects.toThrow(\"Invalid token\");\n+      });\n+\n+      test(\"should reject expired email change tokens\", async () => {\n+        const expiredToken = jwt.sign(\n+          {\n+            id: \"encrypted_test-id\",\n+            email: \"encrypted_test@example.com\",\n+            exp: Math.floor(Date.now() / 1000) - 3600, // Expired 1 hour ago\n+          },\n+          TEST_NEXTAUTH_SECRET\n+        );\n+\n+        await expect(verifyEmailChangeToken(expiredToken)).rejects.toThrow();\n+      });\n+    });\n+\n+    describe(\"Encryption Key Attacks\", () => {\n+      test(\"should fail gracefully with wrong encryption key\", async () => {\n+        mockSymmetricDecrypt.mockImplementation(() => {\n+          throw new Error(\"Authentication tag verification failed\");\n+        });\n+\n+        // Mock findUnique to only return user for correct decrypted ID, not ciphertext\n+        (prisma.user.findUnique as any).mockImplementation(({ where }: { where: { id: string } }) => {\n+          if (where.id === mockUser.id) {\n+            return Promise.resolve(mockUser);\n+          }\n+          return Promise.resolve(null); // Return null for ciphertext IDs\n+        });\n+\n+        const token = createToken(mockUser.id);\n+        // Should fail because ciphertext passed as userId won't match any user in DB\n+        await expect(verifyToken(token)).rejects.toThrow(/User not found/i);\n+      });\n+\n+      test(\"should handle encryption key not set gracefully\", async () => {\n+        const constants = await import(\"@/lib/constants\");\n+        const originalKey = (constants as any).ENCRYPTION_KEY;\n+        (constants as any).ENCRYPTION_KEY = undefined;\n+\n+        const token = jwt.sign(\n+          {\n+            email: \"test@example.com\",\n+            surveyId: \"test-survey-id\",\n+          },\n+          TEST_NEXTAUTH_SECRET\n+        );\n+\n+        const result = verifyTokenForLinkSurvey(token, \"test-survey-id\");\n+        expect(result).toBe(\"test@example.com\");\n+\n+        // Restore\n+        (constants as any).ENCRYPTION_KEY = originalKey;\n+      });\n+    });\n+\n+    describe(\"SQL Injection Attempts\", () => {\n+      test(\"should safely handle malicious user IDs\", async () => {\n+        const maliciousIds = [\n+          \"'; DROP TABLE users; --\",\n+          \"1' OR '1'='1\",\n+          \"admin'/*\",\n+          \"<script>alert('xss')</script>\",\n+          \"../../etc/passwd\",\n+        ];\n+\n+        for (const maliciousId of maliciousIds) {\n+          mockSymmetricDecrypt.mockReturnValueOnce(maliciousId);\n+\n+          const token = jwt.sign({ id: \"encrypted_malicious\" }, TEST_NEXTAUTH_SECRET);\n+\n+          // The function should look up the user safely\n+          await verifyToken(token);\n+          expect(prisma.user.findUnique).toHaveBeenCalledWith({\n+            where: { id: maliciousId },\n+          });\n+        }\n+      });\n+    });\n+\n+    describe(\"Token Reuse and Replay Attacks\", () => {\n+      test(\"should allow legitimate token reuse within validity period\", async () => {\n+        const token = createToken(mockUser.id);\n+\n+        // First use\n+        const result1 = await verifyToken(token);\n+        expect(result1.id).toBe(mockUser.id); // Returns decrypted user ID\n+\n+        // Second use (should still work)\n+        const result2 = await verifyToken(token);\n+        expect(result2.id).toBe(mockUser.id); // Returns decrypted user ID\n+      });\n+    });\n+\n+    describe(\"Legacy Token Compatibility\", () => {\n+      test(\"should handle legacy unencrypted tokens gracefully\", async () => {\n+        // Legacy token with plain text data\n+        const legacyToken = jwt.sign({ id: mockUser.id }, TEST_NEXTAUTH_SECRET);\n+        const result = await verifyToken(legacyToken);\n+\n+        expect(result.id).toBe(mockUser.id); // Returns raw ID from payload\n+        expect(result.email).toBe(mockUser.email);\n+      });\n+\n+      test(\"should handle mixed encrypted/unencrypted fields\", async () => {\n+        mockSymmetricDecrypt\n+          .mockImplementationOnce(() => mockUser.id) // id decrypts successfully\n+          .mockImplementationOnce(() => {\n+            throw new Error(\"Email not encrypted\");\n+          }); // email fails\n+\n+        const token = jwt.sign(\n+          {\n+            id: \"encrypted_test-id\",\n+            email: \"plain-email@example.com\",\n+          },\n+          TEST_NEXTAUTH_SECRET\n+        );\n+\n+        const result = await verifyEmailChangeToken(token);\n+        expect(result.id).toBe(mockUser.id);\n+        expect(result.email).toBe(\"plain-email@example.com\");\n+      });\n+\n+      test(\"should verify old format user tokens with email-based secrets\", async () => {\n+        // Simulate old token format with per-user secret\n+        const oldFormatToken = jwt.sign(\n+          { id: `encrypted_${mockUser.id}` },\n+          TEST_NEXTAUTH_SECRET + mockUser.email\n+        );\n+\n+        const result = await verifyToken(oldFormatToken);\n+        expect(result.id).toBe(mockUser.id); // Returns decrypted user ID\n+        expect(result.email).toBe(mockUser.email);\n+      });\n+\n+      test(\"should verify old format survey tokens with survey-based secrets\", () => {\n+        const surveyId = \"legacy-survey-id\";\n+\n+        // Simulate old survey token format\n+        const oldFormatSurveyToken = jwt.sign(\n+          { email: `encrypted_${mockUser.email}` },\n+          TEST_NEXTAUTH_SECRET + surveyId\n+        );\n+\n+        const result = verifyTokenForLinkSurvey(oldFormatSurveyToken, surveyId);\n+        expect(result).toBe(mockUser.email);\n+      });\n+\n+      test(\"should gracefully handle database errors during legacy verification\", async () => {\n+        // Create token that will fail new method\n+        const legacyToken = jwt.sign(\n+          { id: `encrypted_${mockUser.id}` },\n+          TEST_NEXTAUTH_SECRET + mockUser.email\n+        );\n+\n+        // Make database lookup fail\n+        (prisma.user.findUnique as any).mockRejectedValueOnce(new Error(\"DB connection lost\"));\n+\n+        await expect(verifyToken(legacyToken)).rejects.toThrow(\"DB connection lost\");\n+      });\n+    });\n+\n+    describe(\"Edge Cases and Error Handling\", () => {\n+      test(\"should handle database connection errors gracefully\", async () => {\n+        (prisma.user.findUnique as any).mockRejectedValue(new Error(\"Database connection failed\"));\n+\n+        const token = createToken(mockUser.id);\n+        await expect(verifyToken(token)).rejects.toThrow(\"Database connection failed\");\n+      });\n+\n+      test(\"should handle crypto module errors\", () => {\n+        mockSymmetricEncrypt.mockImplementation(() => {\n+          throw new Error(\"Crypto module error\");\n+        });\n+\n+        expect(() => createToken(mockUser.id)).toThrow(\"Crypto module error\");\n+      });\n+\n+      test(\"should validate email format in tokens\", () => {\n+        const invalidEmails = [\"\", \"not-an-email\", \"missing@\", \"@missing-local.com\", \"spaces in@email.com\"];\n+\n+        invalidEmails.forEach((invalidEmail) => {\n+          expect(() => createEmailToken(invalidEmail)).not.toThrow();\n+          // Note: JWT functions don't validate email format, they just encrypt/decrypt\n+          // Email validation should happen at a higher level\n+        });\n+      });\n+\n+      test(\"should handle extremely long inputs\", () => {\n+        const longString = \"a\".repeat(10000);\n+\n+        expect(() => createToken(longString)).not.toThrow();\n+        expect(() => createEmailToken(longString)).not.toThrow();\n+      });\n+\n+      test(\"should handle special characters in user data\", () => {\n+        const specialChars = \"!@#$%^&*()_+-=[]{}|;:'\\\",.<>?/~`\";\n+\n+        expect(() => createToken(specialChars)).not.toThrow();\n+        expect(() => createEmailToken(specialChars)).not.toThrow();\n+      });\n+    });\n+\n+    describe(\"Performance and Resource Exhaustion\", () => {\n+      test(\"should handle rapid token creation without memory leaks\", () => {\n+        const tokens: string[] = [];\n+        for (let i = 0; i < 1000; i++) {\n+          tokens.push(createToken(`user-${i}`));\n+        }\n+\n+        expect(tokens.length).toBe(1000);\n+        expect(tokens.every((token) => typeof token === \"string\")).toBe(true);\n+      });\n+\n+      test(\"should handle rapid token verification\", async () => {\n+        const token = createToken(mockUser.id);\n+\n+        const verifications: Promise<any>[] = [];\n+        for (let i = 0; i < 100; i++) {\n+          verifications.push(verifyToken(token));\n+        }\n+\n+        const results = await Promise.all(verifications);\n+        expect(results.length).toBe(100);\n+        expect(results.every((result: any) => result.id === mockUser.id)).toBe(true); // Returns decrypted user ID\n+      });\n+    });\n   });\n });"
-        ]
-    }
+    "DataTables": [
+        {
+            "id": 1,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/DataTables/new/examples.php",
+            "start_line": 4,
+            "end_line": 4,
+            "code_snippet": "\techo htmlspecialchars( file_get_contents( '../server_side/'.$_POST['src'] ) );"
+        },
+        {
+            "id": 2,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/DataTables/old/examples.php",
+            "start_line": 4,
+            "end_line": 4,
+            "code_snippet": "\techo htmlspecialchars( file_get_contents( '../server_side/'.$_POST['src'] ) );"
+        }
+    ],
+    "FreshRSS": [
+        {
+            "id": 3,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/ext.php",
+            "start_line": 101,
+            "end_line": 101,
+            "code_snippet": "$mtime = @filemtime($absolute_filename);"
+        },
+        {
+            "id": 4,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/ext.php",
+            "start_line": 109,
+            "end_line": 109,
+            "code_snippet": "\treadfile($absolute_filename);"
+        },
+        {
+            "id": 5,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/f.php",
+            "start_line": 28,
+            "end_line": 28,
+            "code_snippet": "$ico_mtime = @filemtime($ico) ?: 0;"
+        },
+        {
+            "id": 6,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/f.php",
+            "start_line": 29,
+            "end_line": 29,
+            "code_snippet": "$txt_mtime = @filemtime($txt) ?: 0;"
+        },
+        {
+            "id": 7,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/f.php",
+            "start_line": 40,
+            "end_line": 40,
+            "code_snippet": "\t$url = file_get_contents($txt);"
+        },
+        {
+            "id": 8,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/f.php",
+            "start_line": 58,
+            "end_line": 58,
+            "code_snippet": "\t\ttouch($ico);"
+        },
+        {
+            "id": 9,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/f.php",
+            "start_line": 69,
+            "end_line": 69,
+            "code_snippet": "\treadfile($ico);"
+        },
+        {
+            "id": 10,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/fever.php",
+            "start_line": 161,
+            "end_line": 161,
+            "code_snippet": "\t\t\t$username = @file_get_contents(DATA_PATH . '/fever/.key-' . sha1(FreshRSS_Context::systemConf()->salt) . '-' . $feverKey . '.txt', false);"
+        },
+        {
+            "id": 11,
+            "message": "Make sure comparisons involving md5 values are strict (use `===` not `==`) to avoid type juggling issues",
+            "file": "file_downloads/FreshRSS/new/fever.php",
+            "start_line": 162,
+            "end_line": 162,
+            "code_snippet": "\t\t\tif ($username != false) {"
+        },
+        {
+            "id": 12,
+            "message": "Access-Control-Allow-Origin response header is set to \"*\". This will disable CORS Same Origin Policy restrictions.",
+            "file": "file_downloads/FreshRSS/new/greader.php",
+            "start_line": 997,
+            "end_line": 997,
+            "code_snippet": "\t\theader('Access-Control-Allow-Origin: *');"
+        },
+        {
+            "id": 13,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 29,
+            "end_line": 29,
+            "code_snippet": "$canonical = @file_get_contents('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 14,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 43,
+            "end_line": 43,
+            "code_snippet": "$hubFile = @file_get_contents('feeds/' . $canonicalHash . '/!hub.json');"
+        },
+        {
+            "id": 15,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 46,
+            "end_line": 46,
+            "code_snippet": "\tunlink('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 16,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 46,
+            "end_line": 46,
+            "code_snippet": "\tunlink('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 17,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 61,
+            "end_line": 61,
+            "code_snippet": "\tunlink('../../keys/' . $key . '.txt');"
+        },
+        {
+            "id": 18,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 61,
+            "end_line": 61,
+            "code_snippet": "\tunlink('../../keys/' . $key . '.txt');"
+        },
+        {
+            "id": 19,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 145,
+            "end_line": 145,
+            "code_snippet": "\t\tunlink($userFilename);"
+        },
+        {
+            "id": 20,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "start_line": 163,
+            "end_line": 163,
+            "code_snippet": "\t\t\tunlink($userFilename);"
+        },
+        {
+            "id": 21,
+            "message": "Access-Control-Allow-Origin response header is set to \"*\". This will disable CORS Same Origin Policy restrictions.",
+            "file": "file_downloads/FreshRSS/new/query.php",
+            "start_line": 171,
+            "end_line": 171,
+            "code_snippet": "header('Access-Control-Allow-Origin: *');"
+        },
+        {
+            "id": 22,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/ext.php",
+            "start_line": 99,
+            "end_line": 99,
+            "code_snippet": "$mtime = @filemtime($absolute_filename);"
+        },
+        {
+            "id": 23,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/ext.php",
+            "start_line": 107,
+            "end_line": 107,
+            "code_snippet": "\treadfile($absolute_filename);"
+        },
+        {
+            "id": 24,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/f.php",
+            "start_line": 25,
+            "end_line": 25,
+            "code_snippet": "$ico_mtime = @filemtime($ico) ?: 0;"
+        },
+        {
+            "id": 25,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/f.php",
+            "start_line": 26,
+            "end_line": 26,
+            "code_snippet": "$txt_mtime = @filemtime($txt) ?: 0;"
+        },
+        {
+            "id": 26,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/f.php",
+            "start_line": 37,
+            "end_line": 37,
+            "code_snippet": "\t$url = file_get_contents($txt);"
+        },
+        {
+            "id": 27,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/f.php",
+            "start_line": 55,
+            "end_line": 55,
+            "code_snippet": "\t\ttouch($ico);"
+        },
+        {
+            "id": 28,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/f.php",
+            "start_line": 67,
+            "end_line": 67,
+            "code_snippet": "\treadfile($ico);"
+        },
+        {
+            "id": 29,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/fever.php",
+            "start_line": 159,
+            "end_line": 159,
+            "code_snippet": "\t\t\t$username = @file_get_contents(DATA_PATH . '/fever/.key-' . sha1(FreshRSS_Context::systemConf()->salt) . '-' . $feverKey . '.txt', false);"
+        },
+        {
+            "id": 30,
+            "message": "Make sure comparisons involving md5 values are strict (use `===` not `==`) to avoid type juggling issues",
+            "file": "file_downloads/FreshRSS/old/fever.php",
+            "start_line": 160,
+            "end_line": 160,
+            "code_snippet": "\t\t\tif ($username != false) {"
+        },
+        {
+            "id": 31,
+            "message": "Access-Control-Allow-Origin response header is set to \"*\". This will disable CORS Same Origin Policy restrictions.",
+            "file": "file_downloads/FreshRSS/old/greader.php",
+            "start_line": 994,
+            "end_line": 994,
+            "code_snippet": "\t\theader('Access-Control-Allow-Origin: *');"
+        },
+        {
+            "id": 32,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 28,
+            "end_line": 28,
+            "code_snippet": "$canonical = @file_get_contents('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 33,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 42,
+            "end_line": 42,
+            "code_snippet": "$hubFile = @file_get_contents('feeds/' . $canonicalHash . '/!hub.json');"
+        },
+        {
+            "id": 34,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 45,
+            "end_line": 45,
+            "code_snippet": "\tunlink('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 35,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 45,
+            "end_line": 45,
+            "code_snippet": "\tunlink('keys/' . $key . '.txt');"
+        },
+        {
+            "id": 36,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 60,
+            "end_line": 60,
+            "code_snippet": "\tunlink('../../keys/' . $key . '.txt');"
+        },
+        {
+            "id": 37,
+            "message": "File name based on user input risks server-side request forgery.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 60,
+            "end_line": 60,
+            "code_snippet": "\tunlink('../../keys/' . $key . '.txt');"
+        },
+        {
+            "id": 38,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 144,
+            "end_line": 144,
+            "code_snippet": "\t\tunlink($userFilename);"
+        },
+        {
+            "id": 39,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "start_line": 162,
+            "end_line": 162,
+            "code_snippet": "\t\t\tunlink($userFilename);"
+        },
+        {
+            "id": 40,
+            "message": "Access-Control-Allow-Origin response header is set to \"*\". This will disable CORS Same Origin Policy restrictions.",
+            "file": "file_downloads/FreshRSS/old/query.php",
+            "start_line": 168,
+            "end_line": 168,
+            "code_snippet": "header('Access-Control-Allow-Origin: *');"
+        }
+    ],
+    "KnowageLabs": [
+        {
+            "id": 41,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 728,
+            "end_line": 739,
+            "code_snippet": "\t\t\tString modelName = req.getParameter(\"model\");\n\t\t\tString schemaName = req.getParameter(\"schema\");\n\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);\n\n\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");"
+        },
+        {
+            "id": 42,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 729,
+            "end_line": 743,
+            "code_snippet": "\t\t\tString schemaName = req.getParameter(\"schema\");\n\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);\n\n\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");\n\t\t\t// set specified model name\n\t\t\tsetModelName(businessModel, modelName);\n\n\t\t\tlogger.debug(\"setting schema name [\" + schemaName + \"]\");"
+        },
+        {
+            "id": 43,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 730,
+            "end_line": 747,
+            "code_snippet": "\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);\n\n\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");\n\t\t\t// set specified model name\n\t\t\tsetModelName(businessModel, modelName);\n\n\t\t\tlogger.debug(\"setting schema name [\" + schemaName + \"]\");\n\t\t\t// set specified schema name for generation\n\t\t\tsetSchemaName(businessModel, schemaName);\n\n\t\t\tlogger.debug(\"setting catalog name [\" + catalogName + \"]\");"
+        },
+        {
+            "id": 44,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 739,
+            "end_line": 739,
+            "code_snippet": "\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");"
+        },
+        {
+            "id": 45,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 743,
+            "end_line": 743,
+            "code_snippet": "\t\t\tlogger.debug(\"setting schema name [\" + schemaName + \"]\");"
+        },
+        {
+            "id": 46,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 747,
+            "end_line": 747,
+            "code_snippet": "\t\t\tlogger.debug(\"setting catalog name [\" + catalogName + \"]\");"
+        },
+        {
+            "id": 47,
+            "message": "Detected a potential path traversal. A malicious actor could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 790,
+            "end_line": 790,
+            "code_snippet": "\t\t\t\t\tInputStream inputStream = new FileInputStream(tmpDirJarFile + File.separator + filename);"
+        },
+        {
+            "id": 48,
+            "message": "Possible active debug code detected. Deploying an application with debug code can create unintended entry points or expose sensitive information.",
+            "file": "file_downloads/KnowageLabs/new/MetaService.java",
+            "start_line": 1554,
+            "end_line": 1554,
+            "code_snippet": "\t\t\tt.printStackTrace();"
+        },
+        {
+            "id": 49,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 726,
+            "end_line": 737,
+            "code_snippet": "\t\t\t// meta model version (content)\n\t\t\tString modelName = req.getParameter(\"model\");\n\t\t\tString schemaName = req.getParameter(\"schema\");\n\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);"
+        },
+        {
+            "id": 50,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 727,
+            "end_line": 741,
+            "code_snippet": "\t\t\tString modelName = req.getParameter(\"model\");\n\t\t\tString schemaName = req.getParameter(\"schema\");\n\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);\n\n\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");\n\t\t\t// set specified model name\n\t\t\tsetModelName(businessModel, modelName);"
+        },
+        {
+            "id": 51,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 728,
+            "end_line": 745,
+            "code_snippet": "\t\t\tString schemaName = req.getParameter(\"schema\");\n\t\t\tString catalogName = req.getParameter(\"catalog\");\n\t\t\tString isForRegistry = req.getParameter(\"registry\");\n\t\t\tString includeSourcesValue = req.getParameter(\"includeSources\");\n\n\t\t\tsetProfileDialectThreadLocal(model);\n\n\t\t\tlogger.debug(\"Loading Business Model entity of metamodel...\");\n\t\t\tBusinessModel businessModel = model.getBusinessModels().get(0);\n\n\t\t\tlogger.debug(\"setting model name [\" + modelName + \"]\");\n\t\t\t// set specified model name\n\t\t\tsetModelName(businessModel, modelName);\n\n\t\t\tlogger.debug(\"setting schema name [\" + schemaName + \"]\");\n\t\t\t// set specified schema name for generation\n\t\t\tsetSchemaName(businessModel, schemaName);"
+        },
+        {
+            "id": 52,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 737,
+            "end_line": 737,
+            "code_snippet": ""
+        },
+        {
+            "id": 53,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 741,
+            "end_line": 741,
+            "code_snippet": ""
+        },
+        {
+            "id": 54,
+            "message": "When data from an untrusted source is put into a logger and not neutralized correctly, an attacker could forge log entries or include malicious content.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 745,
+            "end_line": 745,
+            "code_snippet": ""
+        },
+        {
+            "id": 55,
+            "message": "Detected a potential path traversal. A malicious actor could control the location of this file, to include going backwards in the directory with '../'. To address this, ensure that user-controlled variables in file paths are sanitized. You may also consider using a utility method such as org.apache.commons.io.FilenameUtils.getName(...) to only retrieve the file name from the path.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 788,
+            "end_line": 788,
+            "code_snippet": "\t\t\t\t\tlogger.debug(\"Temporary directory jar file: \" + tmpDirJarFile);"
+        },
+        {
+            "id": 56,
+            "message": "Possible active debug code detected. Deploying an application with debug code can create unintended entry points or expose sensitive information.",
+            "file": "file_downloads/KnowageLabs/old/MetaService.java",
+            "start_line": 1553,
+            "end_line": 1553,
+            "code_snippet": "\t\t} catch (Throwable t) {"
+        }
+    ],
+    "auth0": [
+        {
+            "id": 57,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/auth0/new/HttpRequestTest.php",
+            "start_line": 209,
+            "end_line": 209,
+            "code_snippet": "        @unlink($tempFile);"
+        },
+        {
+            "id": 58,
+            "message": "Using user input when deleting files with `unlink()` is potentially dangerous. A malicious actor could use this to modify or access files they have no right to.",
+            "file": "file_downloads/auth0/new/HttpRequestTest.php",
+            "start_line": 225,
+            "end_line": 225,
+            "code_snippet": "        @unlink($tempFile);"
+        }
+    ],
+    "civetweb": [
+        {
+            "id": 59,
+            "message": "Insecure WebSocket Detected. WebSocket Secure (wss) should be used for all WebSocket connections.",
+            "file": "file_downloads/civetweb/new/civetweb.c",
+            "start_line": 18835,
+            "end_line": 18835,
+            "code_snippet": "                         {\"ws://\", 5, 80},"
+        },
+        {
+            "id": 60,
+            "message": "Insecure WebSocket Detected. WebSocket Secure (wss) should be used for all WebSocket connections.",
+            "file": "file_downloads/civetweb/old/civetweb.c",
+            "start_line": 18830,
+            "end_line": 18830,
+            "code_snippet": "                         {\"ws://\", 5, 80},"
+        }
+    ],
+    "danny-avila": [
+        {
+            "id": 61,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/danny-avila/new/v1.js",
+            "start_line": 271,
+            "end_line": 274,
+            "code_snippet": "    const newAgentData = Object.assign(cloneData, {\n      id: newAgentId,\n      author: userId,\n    });"
+        },
+        {
+            "id": 62,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/danny-avila/old/v1.js",
+            "start_line": 61,
+            "end_line": 68,
+            "code_snippet": "    Object.assign(agentData, {\n      author: userId,\n      name,\n      description,\n      instructions,\n      provider,\n      model,\n    });"
+        },
+        {
+            "id": 63,
+            "message": "JSON injection occurs when untrusted input is incorporated into a JavaScript object without proper validation or sanitization. When using methods like Object.assign, malicious input can override or add unintended properties to the object. Attackers may inject properties that alter the application's behavior. Validate the structure and content of input data to ensure it adheres to expected schemas. Reject inputs containing unexpected or disallowed properties.",
+            "file": "file_downloads/danny-avila/old/v1.js",
+            "start_line": 61,
+            "end_line": 68,
+            "code_snippet": "    Object.assign(agentData, {\n      author: userId,\n      name,\n      description,\n      instructions,\n      provider,\n      model,\n    });"
+        },
+        {
+            "id": 64,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/danny-avila/old/v1.js",
+            "start_line": 262,
+            "end_line": 265,
+            "code_snippet": "    const newAgentData = Object.assign(cloneData, {\n      id: newAgentId,\n      author: userId,\n    });"
+        }
+    ],
+    "discourse": [
+        {
+            "id": 65,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 51,
+            "end_line": 54,
+            "code_snippet": "            metaElement.innerHTML = i18n(\"chat.quote.original_channel\", {\n              channel: replaceEmoji(node.attrs.channel),\n              channelLink,\n            });"
+        },
+        {
+            "id": 66,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 61,
+            "end_line": 63,
+            "code_snippet": "            channelLinkElement.innerHTML = `#${replaceEmoji(\n              node.attrs.channel\n            )}`;"
+        },
+        {
+            "id": 67,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 75,
+            "end_line": 78,
+            "code_snippet": "        userElement.innerHTML = `\n          <span class=\"chat-transcript-username\">${node.attrs.username}</span>\n          <span class=\"chat-transcript-datetime\">${formattedDateTime}</span>\n        `;"
+        },
+        {
+            "id": 68,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 82,
+            "end_line": 82,
+            "code_snippet": "        messagesElement.innerHTML = node.attrs.html;"
+        },
+        {
+            "id": 69,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 106,
+            "end_line": 108,
+            "code_snippet": "          threadTitleElement.innerHTML = node.attrs.threadTitle\n            ? replaceEmoji(node.attrs.threadTitle)\n            : i18n(\"chat.quote.default_thread_title\");"
+        },
+        {
+            "id": 70,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/new/rich-editor-extension.js",
+            "start_line": 123,
+            "end_line": 123,
+            "code_snippet": "            threadDetailsElement.innerHTML += node.attrs.threadHtml;"
+        },
+        {
+            "id": 71,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 51,
+            "end_line": 54,
+            "code_snippet": "            metaElement.innerHTML = i18n(\"chat.quote.original_channel\", {\n              channel: emojiUnescape(node.attrs.channel),\n              channelLink,\n            });"
+        },
+        {
+            "id": 72,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 61,
+            "end_line": 63,
+            "code_snippet": "            channelLinkElement.innerHTML = `#${emojiUnescape(\n              node.attrs.channel\n            )}`;"
+        },
+        {
+            "id": 73,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 75,
+            "end_line": 78,
+            "code_snippet": "        userElement.innerHTML = `\n          <span class=\"chat-transcript-username\">${node.attrs.username}</span>\n          <span class=\"chat-transcript-datetime\">${formattedDateTime}</span>\n        `;"
+        },
+        {
+            "id": 74,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 82,
+            "end_line": 82,
+            "code_snippet": "        messagesElement.innerHTML = node.attrs.html;"
+        },
+        {
+            "id": 75,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 106,
+            "end_line": 108,
+            "code_snippet": "          threadTitleElement.innerHTML = node.attrs.threadTitle\n            ? emojiUnescape(node.attrs.threadTitle)\n            : i18n(\"chat.quote.default_thread_title\");"
+        },
+        {
+            "id": 76,
+            "message": "User controlled data in methods like `innerHTML`, `outerHTML` or `document.write` is an anti-pattern that can lead to XSS vulnerabilities",
+            "file": "file_downloads/discourse/old/rich-editor-extension.js",
+            "start_line": 123,
+            "end_line": 123,
+            "code_snippet": "            threadDetailsElement.innerHTML += node.attrs.threadHtml;"
+        }
+    ],
+    "formbricks": [
+        {
+            "id": 77,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 249,
+            "end_line": 249,
+            "code_snippet": "      const legacyToken = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 78,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 255,
+            "end_line": 255,
+            "code_snippet": "      const token = jwt.sign({ email: \"test@example.com\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 79,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 294,
+            "end_line": 294,
+            "code_snippet": "      const tokenWithoutEmail = jwt.sign({ surveyId: \"test-survey-id\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 80,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 310,
+            "end_line": 310,
+            "code_snippet": "        TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 81,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 328,
+            "end_line": 328,
+            "code_snippet": "        TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 82,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 342,
+            "end_line": 342,
+            "code_snippet": "      const legacyToken = jwt.sign({ email: `encrypted_${mockUser.email}` }, TEST_NEXTAUTH_SECRET + surveyId);"
+        },
+        {
+            "id": 83,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 350,
+            "end_line": 350,
+            "code_snippet": "      const invalidToken = jwt.sign({ email: \"encrypted_test@example.com\" }, \"wrong-secret\");"
+        },
+        {
+            "id": 84,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 367,
+            "end_line": 367,
+            "code_snippet": "        TEST_NEXTAUTH_SECRET + correctSurveyId"
+        },
+        {
+            "id": 85,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 401,
+            "end_line": 401,
+            "code_snippet": "      const invalidToken = jwt.sign({ id: \"test-id\" }, DIFFERENT_SECRET);"
+        },
+        {
+            "id": 86,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 406,
+            "end_line": 406,
+            "code_snippet": "      const tokenWithoutId = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 87,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 412,
+            "end_line": 412,
+            "code_snippet": "      const token = jwt.sign({ id: mockUser.id }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 88,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 422,
+            "end_line": 422,
+            "code_snippet": "      const legacyToken = jwt.sign({ id: `encrypted_${mockUser.id}` }, TEST_NEXTAUTH_SECRET + mockUser.email);"
+        },
+        {
+            "id": 89,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 434,
+            "end_line": 434,
+            "code_snippet": "      const legacyToken = jwt.sign({ id: `encrypted_${mockUser.id}` }, TEST_NEXTAUTH_SECRET + mockUser.email);"
+        },
+        {
+            "id": 90,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 446,
+            "end_line": 446,
+            "code_snippet": "      const invalidToken = jwt.sign({ id: \"encrypted_test-id\" }, \"wrong-secret\");"
+        },
+        {
+            "id": 91,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 482,
+            "end_line": 482,
+            "code_snippet": "      const tokenWithoutInviteId = jwt.sign({ email: mockUser.email }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 92,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 487,
+            "end_line": 487,
+            "code_snippet": "      const tokenWithoutEmail = jwt.sign({ inviteId: \"test-invite-id\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 93,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 502,
+            "end_line": 502,
+            "code_snippet": "        TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 94,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 518,
+            "end_line": 518,
+            "code_snippet": "        DIFFERENT_SECRET"
+        },
+        {
+            "id": 95,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 539,
+            "end_line": 539,
+            "code_snippet": "      const token = jwt.sign({ foo: \"bar\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 96,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 546,
+            "end_line": 546,
+            "code_snippet": "      const token = jwt.sign({ email: \"test@example.com\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 97,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 553,
+            "end_line": 553,
+            "code_snippet": "      const token = jwt.sign({ id: \"test-id\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 98,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 565,
+            "end_line": 565,
+            "code_snippet": "      const token = jwt.sign(payload, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 99,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 576,
+            "end_line": 576,
+            "code_snippet": "        DIFFERENT_SECRET"
+        },
+        {
+            "id": 100,
+            "message": "Detected a hardcoded hmac key. Avoid hardcoding secrets and consider using an alternate option such as reading the secret from a config file or using an environment variable.",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 684,
+            "end_line": 685,
+            "code_snippet": "        const signature = crypto\n          .createHmac(\"sha256\", TEST_NEXTAUTH_SECRET)"
+        },
+        {
+            "id": 101,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 775,
+            "end_line": 775,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 102,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 788,
+            "end_line": 788,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 103,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 824,
+            "end_line": 824,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 104,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 848,
+            "end_line": 848,
+            "code_snippet": "          const token = jwt.sign({ id: \"encrypted_malicious\" }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 105,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 876,
+            "end_line": 876,
+            "code_snippet": "        const legacyToken = jwt.sign({ id: mockUser.id }, TEST_NEXTAUTH_SECRET);"
+        },
+        {
+            "id": 106,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 895,
+            "end_line": 895,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET"
+        },
+        {
+            "id": 107,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 907,
+            "end_line": 907,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET + mockUser.email"
+        },
+        {
+            "id": 108,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 921,
+            "end_line": 921,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET + surveyId"
+        },
+        {
+            "id": 109,
+            "message": "A hard-coded credential was detected. It is not recommended to store credentials in source-code, as this risks secrets being leaked and used by either an internal or external malicious adversary. It is recommended to use environment variables to securely provide credentials or retrieve credentials from a secure vault or HSM (Hardware Security Module).",
+            "file": "file_downloads/formbricks/new/jwt.test.ts",
+            "start_line": 932,
+            "end_line": 932,
+            "code_snippet": "          TEST_NEXTAUTH_SECRET + mockUser.email"
+        }
+    ],
+    "librechat": [
+        {
+            "id": 110,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/librechat/new/v1.js",
+            "start_line": 271,
+            "end_line": 274,
+            "code_snippet": "    const newAgentData = Object.assign(cloneData, {\n      id: newAgentId,\n      author: userId,\n    });"
+        },
+        {
+            "id": 111,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/librechat/old/v1.js",
+            "start_line": 61,
+            "end_line": 68,
+            "code_snippet": "    Object.assign(agentData, {\n      author: userId,\n      name,\n      description,\n      instructions,\n      provider,\n      model,\n    });"
+        },
+        {
+            "id": 112,
+            "message": "JSON injection occurs when untrusted input is incorporated into a JavaScript object without proper validation or sanitization. When using methods like Object.assign, malicious input can override or add unintended properties to the object. Attackers may inject properties that alter the application's behavior. Validate the structure and content of input data to ensure it adheres to expected schemas. Reject inputs containing unexpected or disallowed properties.",
+            "file": "file_downloads/librechat/old/v1.js",
+            "start_line": 61,
+            "end_line": 68,
+            "code_snippet": "    Object.assign(agentData, {\n      author: userId,\n      name,\n      description,\n      instructions,\n      provider,\n      model,\n    });"
+        },
+        {
+            "id": 113,
+            "message": "Depending on the context, user control data in `Object.assign` can cause web response to include data that it should not have or can lead to a mass assignment vulnerability.",
+            "file": "file_downloads/librechat/old/v1.js",
+            "start_line": 262,
+            "end_line": 265,
+            "code_snippet": "    const newAgentData = Object.assign(cloneData, {\n      id: newAgentId,\n      author: userId,\n    });"
+        }
+    ],
+    "mondeja": [
+        {
+            "id": 114,
+            "message": "Found non static data as an index to 'globals()'. This is extremely dangerous because it allows an attacker to execute arbitrary code on the system. Refactor your code not to use 'globals()'.",
+            "file": "file_downloads/mondeja/new/event.py",
+            "start_line": 286,
+            "end_line": 286,
+            "code_snippet": "                delimiter_value = locals()[delimiter_name]"
+        },
+        {
+            "id": 115,
+            "message": "Found non static data as an index to 'globals()'. This is extremely dangerous because it allows an attacker to execute arbitrary code on the system. Refactor your code not to use 'globals()'.",
+            "file": "file_downloads/mondeja/new/event.py",
+            "start_line": 578,
+            "end_line": 578,
+            "code_snippet": "                delimiter_value = locals()[delimiter_name]"
+        },
+        {
+            "id": 116,
+            "message": "Found non static data as an index to 'globals()'. This is extremely dangerous because it allows an attacker to execute arbitrary code on the system. Refactor your code not to use 'globals()'.",
+            "file": "file_downloads/mondeja/old/event.py",
+            "start_line": 304,
+            "end_line": 304,
+            "code_snippet": "                delimiter_value = locals()[delimiter_name]"
+        },
+        {
+            "id": 117,
+            "message": "Found non static data as an index to 'globals()'. This is extremely dangerous because it allows an attacker to execute arbitrary code on the system. Refactor your code not to use 'globals()'.",
+            "file": "file_downloads/mondeja/old/event.py",
+            "start_line": 596,
+            "end_line": 596,
+            "code_snippet": "                delimiter_value = locals()[delimiter_name]"
+        }
+    ],
+    "wneessen": [
+        {
+            "id": 118,
+            "message": "When working with web applications that involve rendering user-generated  content, it's important to properly escape any HTML content to prevent  Cross-Site Scripting (XSS) attacks. In Go, the `text/template` package does  not automatically escape HTML content, which can leave your application  vulnerable to these types of attacks. To mitigate this risk, it's  recommended to use the `html/template` package instead, which provides  built-in functionality for HTML escaping. By using `html/template` to render  your HTML content, you can help to ensure that your web application is more  secure and less susceptible to XSS vulnerabilities.",
+            "file": "file_downloads/wneessen/new/msg.go",
+            "start_line": 28,
+            "end_line": 28,
+            "code_snippet": "\ttt \"text/template\""
+        },
+        {
+            "id": 119,
+            "message": "Detected non-static command inside Command. Audit the input to 'exec.Command'. If unverified user data can reach this call site, this is a code injection vulnerability. A malicious actor can inject a malicious script to execute arbitrary code.",
+            "file": "file_downloads/wneessen/new/msg.go",
+            "start_line": 2582,
+            "end_line": 2582,
+            "code_snippet": "\tcmdCtx := exec.CommandContext(ctx, sendmailPath)"
+        },
+        {
+            "id": 120,
+            "message": "`MinVersion` is missing from this TLS configuration.  By default, as of Go 1.22, TLS 1.2 is currently used as the minimum. General purpose web applications should default to TLS 1.3 with all other protocols disabled.  Only where it is known that a web server must support legacy clients with unsupported an insecure browsers (such as Internet Explorer 10), it may be necessary to enable TLS 1.0 to provide support. Add `MinVersion: tls.VersionTLS13' to the TLS configuration to bump the minimum version to TLS 1.3.",
+            "file": "file_downloads/wneessen/new/smtp.go",
+            "start_line": 508,
+            "end_line": 508,
+            "code_snippet": "\t\tconfig := &tls.Config{ServerName: c.serverName}"
+        },
+        {
+            "id": 121,
+            "message": "When working with web applications that involve rendering user-generated  content, it's important to properly escape any HTML content to prevent  Cross-Site Scripting (XSS) attacks. In Go, the `text/template` package does  not automatically escape HTML content, which can leave your application  vulnerable to these types of attacks. To mitigate this risk, it's  recommended to use the `html/template` package instead, which provides  built-in functionality for HTML escaping. By using `html/template` to render  your HTML content, you can help to ensure that your web application is more  secure and less susceptible to XSS vulnerabilities.",
+            "file": "file_downloads/wneessen/old/msg.go",
+            "start_line": 28,
+            "end_line": 28,
+            "code_snippet": "\ttt \"text/template\""
+        },
+        {
+            "id": 122,
+            "message": "Detected non-static command inside Command. Audit the input to 'exec.Command'. If unverified user data can reach this call site, this is a code injection vulnerability. A malicious actor can inject a malicious script to execute arbitrary code.",
+            "file": "file_downloads/wneessen/old/msg.go",
+            "start_line": 2579,
+            "end_line": 2579,
+            "code_snippet": "\tcmdCtx := exec.CommandContext(ctx, sendmailPath)"
+        },
+        {
+            "id": 123,
+            "message": "`MinVersion` is missing from this TLS configuration.  By default, as of Go 1.22, TLS 1.2 is currently used as the minimum. General purpose web applications should default to TLS 1.3 with all other protocols disabled.  Only where it is known that a web server must support legacy clients with unsupported an insecure browsers (such as Internet Explorer 10), it may be necessary to enable TLS 1.0 to provide support. Add `MinVersion: tls.VersionTLS13' to the TLS configuration to bump the minimum version to TLS 1.3.",
+            "file": "file_downloads/wneessen/old/smtp.go",
+            "start_line": 508,
+            "end_line": 508,
+            "code_snippet": "\t\tconfig := &tls.Config{ServerName: c.serverName}"
+        }
+    ]
 }

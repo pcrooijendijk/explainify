@@ -1,0 +1,1 @@
+After running `read_snyk.py` and `read_semgrep.py` the results are in the `results` folder as `lines_semgrep.json` and `lines_snyk.json` where the results are stored based on the vulnerabilities found per repository (or repository owner to be exact). The results have the vulnerable code lines, the patches, and the message resulting from the static anlysis tool.

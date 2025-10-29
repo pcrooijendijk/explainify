@@ -1,0 +1,30 @@
+{
+    "DataTables": {
+        "explanation": "- Vulnerability Type: Cross Site Scripting (XSS)\n- Severity: High\n- Root cause: The code is not properly sanitizing user input from `$_POST['src']` before using it in an output, leading to the injection of malicious scripts.\n- Exploit scenario: An attacker can manipulate the `$_POST['src']` data, injecting their own malicious script which would be echoed out without proper HTML encoding (htmlspecialchars), allowing the execution of malicious scripts in the user's browser.\n- Why it happens: The developer did not properly sanitize the user input before using it directly in an output, introducing a security risk.\n- Security implications: An attacker could use this vulnerability to steal sensitive data (such as cookies or session tokens), perform actions on behalf of the victim, or create a phishing attack to trick users into disclosing personal information.\n- Suggested fix: Properly sanitize user input by using functions like htmlspecialchars() before using it in an output. In this case, the developer should change the regular expression in the preg_match function to ensure that only filenames are matched and properly sanitize the contents of the file returned by file_get_contents with htmlspecialchars(). Additionally, consider validating user input and limiting the allowed sources for `$_POST['src']`.",
+        "CWE-id": [
+            "CWE-89"
+        ],
+        "commit_message": "Fix - examples: Tighten up regex check to protect against LFI vulnerability  Credit to Arnaud Labenne of Dotsafe.fr for finding and reporting this."
+    },
+    "KnowageLabs": {
+        "explanation": "- Vulnerability Type: Cross-Site Scripting (XSS)\n- Severity: High\n- Root cause: The code did not properly sanitize user input before being included in the response, allowing an attacker to inject malicious scripts into web pages viewed by other users.\n- Exploit scenario: An attacker can manipulate the input parameters sent to the server, and the server's response will include the attacker's malicious script, which will be executed in the user's browser when they view the affected page.\n- Why it happens: The lack of proper input validation and sanitization increases the risk of XSS attacks. In this case, the issue was due to not using a safer method (JXPathContextBuilder) for creating the JXPath context.\n- Security implications: A successful XSS attack can lead to information disclosure, session hijacking, or user account takeover, as well as other malicious activities that compromise the security and privacy of users.\n- Suggested fix: Instead of using `JXPathContext.newContext(model)`, it is recommended to use a safer method such as `JXPathContextBuilder.newInstance(model).withFactory(new ModelPropertyFactory()).build()` for creating the JXPath context, which provides better input validation and sanitization. This helps prevent Cross-Site Scripting (XSS) attacks.",
+        "CWE-id": [
+            "CWE-89"
+        ],
+        "commit_message": "[Closes KNOWAGE-8569] Improve handling of XPath expressions"
+    },
+    "auth0": {
+        "explanation": "- Vulnerability Type: Cross-Site Scripting (XSS)\n- Severity: High\n- Root cause: The code allows for user-supplied file paths to be passed directly into functions without proper validation and sanitization, potentially leading to XSS attacks.\n- Exploit scenario: An attacker could trick the application into accepting a malicious HTML or script file as an uploaded file, which would then be executed by the application, allowing for arbitrary script injection.\n- Why it happens: The code does not check if the supplied file paths contain any malicious content, such as HTML or scripts, before passing them to functions that could execute them.\n- Security implications: XSS attacks can lead to account takeover, session hijacking, and sensitive data theft. In this case, an attacker could potentially gain control over user sessions and steal sensitive information.\n- Suggested fix: Validate and sanitize all user-supplied file paths before passing them to any function that might execute them. This can be done by checking for invalid characters (such as HTML tags or script delimiters) and encoding any special characters appropriately. Additionally, it's a good practice to use whitelists for allowed file extensions and avoid executing files with potentially dangerous extensions like .php or .html directly from user-supplied input.",
+        "CWE-id": [
+            "CWE-89"
+        ],
+        "commit_message": "fix: Enhance file validation in HttpRequest to prevent arbitrary file read vulnerabilities"
+    },
+    "formbricks": {
+        "explanation": "- Vulnerability Type: Insecure Direct Object References (IDOR)\n- Severity: Medium\n- Root cause: The token generation function concatenates the user's email with the NextAuth secret to generate a JWT secret. An attacker who knows another user's email can potentially generate valid tokens for other users by reusing their email and the same secret.\n- Exploit scenario: An attacker could obtain a valid token for another user, impersonate them, or perform actions on behalf of that user without their knowledge.\n- Why it happens: The function combines the NextAuth secret with the user's email to generate tokens instead of generating unique secrets for each user.\n- Security implications: An attacker could potentially access other users' data, change account settings, or perform unauthorized actions.\n- Suggested fix: Instead of concatenating the user's email and NextAuth secret to generate tokens, use a more secure method such as generating unique secrets for each user. This ensures that even if an attacker learns another user's email, they won't be able to impersonate them or perform unauthorized actions.",
+        "CWE-id": [
+            "CWE-89"
+        ],
+        "commit_message": "fix: enhance JWT handling with improved encryption and decryption logic (#6596)"
+    }
+}

@@ -1,54 +1,58 @@
-import json 
-import re
-from typing import Dict, List
+import json
 
-def find_patch(lines: str, owner: str) -> List:
-    json_path = f'./patch_data/{owner}_patch.json'
-
-    try:
-        with open(json_path, 'r', encoding='utf-8', errors='ignore') as f:
-            data = json.load(f)
-    except Exception as e:
-        print(f"Could not read {json_path}: {e}")
-        return
-
-    patches = []
-
-    for _, value in data.items():
-        file_data = value.get('file', {})
-        if lines in file_data['patch']:
-            patches.append(file_data['patch'])
-    
-    return patches
-
-def safe_lines(data: Dict) -> None:
-    safe_file = {}
-
-    for sample in data['results']:
-        # Getting the path to the file which is found vulnerable after Semgrep analysis
-        path = sample['path']
-        lines = sample['extra']['lines'].lstrip()
-        message_semgrep = sample['extra']['message']
-
-        # Getting the owner of the repository for indexing the dictionary
-        match = re.search(r"^/([^/]+)", path.split("file_downloads")[1])
-        if match: 
-            owner = match.group(1)
-
-        patches = find_patch(lines, owner)
-        if patches: 
-            safe_file[owner] = {
-                'path': path, 
-                'lines': lines,
-                'message_semgrep': message_semgrep,
-                'patches': patches
-            }
-
-    with open("./results/lines_semgrep.json", "w") as f: 
-        json.dump(safe_file, f, indent=4)
-
-if __name__ == "__main__":
-    with open("./results/semgrep_results.json", "r") as f: 
+def parse_semgrep_report(json_file_path: str) -> None:
+    with open(json_file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    safe_lines(data)
+    findings_count = 0
+    vuln_by_project = {}
+
+    for result in data['results']:
+        findings_count += 1
+        
+        extra = result['extra']
+        message = extra.get('message', 'No description provided.')
+        lines_of_code = extra.get('lines', 'No code snippet available.') # Get the code snippet
+
+        file_path = result.get('path', 'Unknown file')
+
+        patches = extra.get('patches', [])
+        if not patches:
+            # If 'patches' is empty, check for 'fix'
+            fix = extra.get('fix')
+            if fix:
+                patches = [fix] # Store 'fix' as a list
+
+        start_line = result.get('start', {}).get('line', 'N/A')
+        end_line = result.get('end', {}).get('line', start_line) # Default to start_line if end_line is missing
+        
+        finding_data = {
+            "id": findings_count,
+            "message": message,
+            "file": file_path,
+            "start_line": start_line,
+            "end_line": end_line,
+            "code_snippet": lines_of_code
+        }
+
+        # Sorting the dictionary by project owner
+        project_key = "" # Default string for owner
+        try:
+            parts = file_path.split('/')
+            if len(parts) > 1:
+                project_key = parts[1]
+            else:
+                project_key = parts[0] 
+        except Exception:
+            pass # Stick with the default name
+
+        if project_key not in vuln_by_project:
+            vuln_by_project[project_key] = []
+        
+        vuln_by_project[project_key].append(finding_data)
+
+    with open("./results/lines_semgrep.json", 'w', encoding='utf-8') as f:
+        json.dump(vuln_by_project, f, indent=4)
+
+if __name__ == "__main__":
+    parse_semgrep_report("./results/semgrep_results.json")
