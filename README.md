@@ -11,7 +11,7 @@
 
 ## Requirements
 
-For running this project, Ollama is required, which can be installed using the steps from [Ollama]([https://github.com/ollama/ollama?tab=readme-ov-file](https://github.com/ollama/ollama?tab=readme-ov-file)). Download Ollama for your OS and pull  `mistral:7b` with: 
+For running this project, Ollama is required, which can be installed using the steps from [Ollama](https://ollama.com/download). Download Ollama for your OS and pull  `mistral:7b` with: 
 
 ```
 ollama pull mistral:7b
