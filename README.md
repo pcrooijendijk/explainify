@@ -9,6 +9,29 @@
 
 ---
 
+## Installation
+
+1.  Clone or download the repository:
+
+```
+git clone explainify
+cd explainify
+```
+
+2. Install the requirements:
+
+```
+pip install -r requirements.txt
+```
+
+3.  Run the bash script for executing the steps as mentioned before:
+
+```
+./job.sh
+```
+
+---
+
 ## Requirements
 
 For running this project, Ollama is required, which can be installed using the steps from [Ollama](https://ollama.com/download). Download Ollama for your OS and pull  `mistral:7b` with: 
@@ -49,29 +72,6 @@ semgrep scan --verbose --no-git-ignore --json --output results/semgrep_results.j
 ```
 cd file_downloads/
 snyk code test --all-projects --json-file-output=vuln.json
-```
-
----
-
-## Installation
-
-1.  Clone or download the repository:
-
-```
-git clone explainify
-cd explainify
-```
-
-2. Install the requirements:
-
-```
-pip install -r requirements.txt
-```
-
-3.  Run the bash script for executing the steps as mentioned before:
-
-```
-./job.sh
 ```
 
 ---
