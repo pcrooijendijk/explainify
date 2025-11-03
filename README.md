@@ -42,7 +42,8 @@ npm install snyk -g
 Then use the following to start the scanning process for your vulnerable files: 
 ### Semgrep
 ```
-semgrep scan --verbose --no-git-ignore --json --output results/semgrep_results.json
+cd file_downloads/
+semgrep scan --verbose --no-git-ignore --json --output ./results/semgrep_results.json
 ```
 
 ### Snyk
