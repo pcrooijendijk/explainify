@@ -1,187 +1,683 @@
 {
-    "siderolabs": [
+    "minio": [
         {
             "id": 1,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in UserID.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/siderolabs/new/handler_test.go",
-            "start_line": 39,
-            "end_line": 39
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1437,
+            "end_line": 1437
         },
         {
             "id": 2,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in UserID.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/siderolabs/new/signature_test.go",
-            "start_line": 63,
-            "end_line": 63
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1583,
+            "end_line": 1583
         },
         {
             "id": 3,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in UserID.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/siderolabs/old/handler_test.go",
-            "start_line": 39,
-            "end_line": 39
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1735,
+            "end_line": 1735
         },
         {
             "id": 4,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in UserID.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/siderolabs/old/signature_test.go",
-            "start_line": 62,
-            "end_line": 62
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1912,
+            "end_line": 1912
         },
         {
             "id": 5,
-            "message": "Unsanitized input from a CLI argument flows into os.ReadFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/siderolabs/new/main.go",
-            "start_line": 107,
-            "end_line": 107
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2015,
+            "end_line": 2015
         },
         {
             "id": 6,
-            "message": "Unsanitized input from a CLI argument flows into os.ReadFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/siderolabs/old/main.go",
-            "start_line": 107,
-            "end_line": 107
-        }
-    ],
-    "LabRedesCefetRJ": [
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2114,
+            "end_line": 2114
+        },
         {
             "id": 7,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/new/profile_pet.php",
-            "start_line": 1095,
-            "end_line": 1099
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2203,
+            "end_line": 2203
         },
         {
             "id": 8,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 866,
-            "end_line": 866
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1331,
+            "end_line": 1331
         },
         {
             "id": 9,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 893,
-            "end_line": 918
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1477,
+            "end_line": 1477
         },
         {
             "id": 10,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1052,
-            "end_line": 1052
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1629,
+            "end_line": 1629
         },
         {
             "id": 11,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1126,
-            "end_line": 1130
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1806,
+            "end_line": 1806
         },
         {
             "id": 12,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1169,
-            "end_line": 1169
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1909,
+            "end_line": 1909
         },
         {
             "id": 13,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1224,
-            "end_line": 1224
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2008,
+            "end_line": 2008
         },
         {
             "id": 14,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1256,
-            "end_line": 1256
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2097,
+            "end_line": 2097
         },
         {
             "id": 15,
-            "message": "Unsanitized input from an HTTP parameter flows into the echo statement, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/admin-handlers-users_test.go",
+            "start_line": 1314,
+            "end_line": 1314
+        },
+        {
+            "id": 16,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 124,
+            "end_line": 124
+        },
+        {
+            "id": 17,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 344,
+            "end_line": 344
+        },
+        {
+            "id": 18,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2175,
+            "end_line": 2175
+        },
+        {
+            "id": 19,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 20,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2069,
+            "end_line": 2069
+        },
+        {
+            "id": 67,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1457,
+            "end_line": 1457
+        },
+        {
+            "id": 68,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1758,
+            "end_line": 1758
+        },
+        {
+            "id": 69,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1901,
+            "end_line": 1901
+        },
+        {
+            "id": 70,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2004,
+            "end_line": 2004
+        },
+        {
+            "id": 71,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1351,
+            "end_line": 1351
+        },
+        {
+            "id": 72,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1652,
+            "end_line": 1652
+        },
+        {
+            "id": 73,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1795,
+            "end_line": 1795
+        },
+        {
+            "id": 74,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1898,
+            "end_line": 1898
+        }
+    ],
+    "strapi": [
+        {
+            "id": 21,
+            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in bcryptjs.compareSync.",
+            "cwe": "CWE-547",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 22,
+            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in bcryptjs.compareSync.",
+            "cwe": "CWE-547",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 23,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 16,
+            "end_line": 16
+        },
+        {
+            "id": 24,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 93,
+            "end_line": 93
+        },
+        {
+            "id": 25,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 145,
+            "end_line": 145
+        },
+        {
+            "id": 26,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 178,
+            "end_line": 178
+        },
+        {
+            "id": 27,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 211,
+            "end_line": 211
+        },
+        {
+            "id": 28,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 254,
+            "end_line": 254
+        },
+        {
+            "id": 29,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 297,
+            "end_line": 297
+        },
+        {
+            "id": 30,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 364,
+            "end_line": 364
+        },
+        {
+            "id": 31,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 373,
+            "end_line": 373
+        },
+        {
+            "id": 32,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 382,
+            "end_line": 382
+        },
+        {
+            "id": 33,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 16,
+            "end_line": 16
+        },
+        {
+            "id": 34,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 90,
+            "end_line": 90
+        },
+        {
+            "id": 35,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 36,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 155,
+            "end_line": 155
+        },
+        {
+            "id": 37,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 188,
+            "end_line": 188
+        },
+        {
+            "id": 38,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 231,
+            "end_line": 231
+        },
+        {
+            "id": 39,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 274,
+            "end_line": 274
+        },
+        {
+            "id": 40,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in newPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 20,
+            "end_line": 20
+        },
+        {
+            "id": 41,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in newPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 20,
+            "end_line": 20
+        },
+        {
+            "id": 42,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 61,
+            "end_line": 61
+        },
+        {
+            "id": 43,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 365,
+            "end_line": 365
+        },
+        {
+            "id": 44,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 374,
+            "end_line": 374
+        },
+        {
+            "id": 45,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 383,
+            "end_line": 383
+        },
+        {
+            "id": 46,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 61,
+            "end_line": 61
+        },
+        {
+            "id": 47,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in currentPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 78,
+            "end_line": 78
+        },
+        {
+            "id": 48,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in currentPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 78,
+            "end_line": 78
+        }
+    ],
+    "sagemathinc": [
+        {
+            "id": 49,
+            "message": "Unsanitized input from an HTTP parameter flows into write, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
             "cwe": "CWE-79",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1422,
-            "end_line": 1422
+            "file": "file_downloads/sagemathinc/new/handle-request.ts",
+            "start_line": 130,
+            "end_line": 130
+        },
+        {
+            "id": 50,
+            "message": "Unsanitized input from an HTTP parameter flows into write, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/old/handle-request.ts",
+            "start_line": 124,
+            "end_line": 124
+        },
+        {
+            "id": 51,
+            "message": "Unsanitized input from the request URL flows into end, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/new/handle-request.ts",
+            "start_line": 186,
+            "end_line": 186
+        },
+        {
+            "id": 52,
+            "message": "Unsanitized input from the request URL flows into end, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/old/handle-request.ts",
+            "start_line": 180,
+            "end_line": 180
+        }
+    ],
+    "MacWarrior": [
+        {
+            "id": 53,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1391,
+            "end_line": 1391
+        },
+        {
+            "id": 54,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1569,
+            "end_line": 1569
+        },
+        {
+            "id": 55,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1827,
+            "end_line": 1827
+        },
+        {
+            "id": 56,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1391,
+            "end_line": 1391
+        },
+        {
+            "id": 57,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1569,
+            "end_line": 1569
+        },
+        {
+            "id": 58,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1827,
+            "end_line": 1827
+        },
+        {
+            "id": 59,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 3196,
+            "end_line": 3196
+        },
+        {
+            "id": 60,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 3322,
+            "end_line": 3322
+        },
+        {
+            "id": 61,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3192,
+            "end_line": 3192
+        },
+        {
+            "id": 62,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3196,
+            "end_line": 3196
+        },
+        {
+            "id": 63,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3322,
+            "end_line": 3322
+        },
+        {
+            "id": 64,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 4673,
+            "end_line": 4673
+        }
+    ],
+    "blakeblackshear": [
+        {
+            "id": 65,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.Popen, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 616,
+            "end_line": 635
+        },
+        {
+            "id": 66,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.Popen, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 616,
+            "end_line": 635
+        },
+        {
+            "id": 75,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1234,
+            "end_line": 1256
+        },
+        {
+            "id": 76,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1302,
+            "end_line": 1323
+        },
+        {
+            "id": 77,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1408,
+            "end_line": 1429
         },
         {
             "id": 78,
-            "message": "An exception object flows to the echo statement and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/LabRedesCefetRJ/new/profile_pet.php",
-            "start_line": 63,
-            "end_line": 63
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1474,
+            "end_line": 1493
         },
         {
             "id": 79,
-            "message": "An exception object flows to the echo statement and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/LabRedesCefetRJ/new/profile_pet.php",
-            "start_line": 95,
-            "end_line": 95
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1234,
+            "end_line": 1256
         },
         {
             "id": 80,
-            "message": "An exception object flows to the echo statement and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 55,
-            "end_line": 55
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1302,
+            "end_line": 1323
         },
         {
             "id": 81,
-            "message": "An exception object flows to the echo statement and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 89,
-            "end_line": 89
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1408,
+            "end_line": 1429
         },
         {
             "id": 82,
-            "message": "Unsanitized input from an HTTP parameter flows into query, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
-            "cwe": "CWE-89",
-            "file": "file_downloads/LabRedesCefetRJ/old/dependente_listar.php",
-            "start_line": 17,
-            "end_line": 17
-        },
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1474,
+            "end_line": 1493
+        }
+    ],
+    "in-toto": [
         {
             "id": 83,
-            "message": "Unsanitized input from an HTTP parameter flows into query, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
-            "cwe": "CWE-89",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1080,
-            "end_line": 1080
-        },
-        {
-            "id": 84,
-            "message": "Unsanitized input from an HTTP parameter flows into query, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
-            "cwe": "CWE-89",
-            "file": "file_downloads/LabRedesCefetRJ/old/profile_pet.php",
-            "start_line": 1084,
-            "end_line": 1084
+            "message": "Unsanitized input from a CLI argument flows into os.ReadFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/in-toto/new/main.go",
+            "start_line": 192,
+            "end_line": 192
         }
     ],
     "opensearch-project": [
         {
-            "id": 16,
+            "id": 84,
             "message": "Do not hardcode credentials in code.",
             "cwe": "CWE-798",
             "file": "file_downloads/opensearch-project/new/ConnectionConfigurationTests.java",
@@ -189,496 +685,148 @@
             "end_line": 61
         },
         {
-            "id": 17,
+            "id": 85,
             "message": "Do not hardcode credentials in code.",
             "cwe": "CWE-798",
             "file": "file_downloads/opensearch-project/old/ConnectionConfigurationTests.java",
             "start_line": 61,
             "end_line": 61
-        }
-    ],
-    "mastodon": [
-        {
-            "id": 18,
-            "message": "Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/mastodon/new/index.js",
-            "start_line": 144,
-            "end_line": 144
         },
         {
-            "id": 19,
-            "message": "Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/mastodon/old/index.js",
-            "start_line": 144,
-            "end_line": 144
+            "id": 86,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/CustomClientSslEngineFactory.java",
+            "start_line": 43,
+            "end_line": 43
         },
         {
-            "id": 20,
-            "message": "node:http.default.createServer uses HTTP which is an insecure protocol and should not be used in code due to cleartext transmission of information. Data in cleartext in a communication channel can be sniffed by unauthorized actors. Consider using the https module instead.",
-            "cwe": "CWE-319",
-            "file": "file_downloads/mastodon/new/index.js",
-            "start_line": 107,
-            "end_line": 107
+            "id": 87,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 44,
+            "end_line": 44
         },
         {
-            "id": 21,
-            "message": "node:http.default.createServer uses HTTP which is an insecure protocol and should not be used in code due to cleartext transmission of information. Data in cleartext in a communication channel can be sniffed by unauthorized actors. Consider using the https module instead.",
-            "cwe": "CWE-319",
-            "file": "file_downloads/mastodon/old/index.js",
-            "start_line": 107,
-            "end_line": 107
-        }
-    ],
-    "capricorn86": [
-        {
-            "id": 22,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/new/BrowserWindow.test.ts",
-            "start_line": 2145,
-            "end_line": 2145
+            "id": 88,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 42,
+            "end_line": 42
         },
         {
-            "id": 23,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/new/BrowserWindow.test.ts",
-            "start_line": 2178,
-            "end_line": 2178
+            "id": 89,
+            "message": "The verify method always returns true, which means that any hostname is accepted. Such behaviour is insecure.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 48,
+            "end_line": 48
         },
         {
-            "id": 24,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/new/HTMLIFrameElement.test.ts",
-            "start_line": 258,
-            "end_line": 258
+            "id": 90,
+            "message": "The verify method always returns true, which means that any hostname is accepted. Such behaviour is insecure.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 48,
+            "end_line": 48
         },
         {
-            "id": 25,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/new/HTMLIFrameElement.test.ts",
-            "start_line": 559,
-            "end_line": 559
+            "id": 91,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 32,
+            "end_line": 32
         },
         {
-            "id": 26,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/old/BrowserWindow.test.ts",
-            "start_line": 2087,
-            "end_line": 2087
+            "id": 92,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
+            "start_line": 25,
+            "end_line": 25
         },
         {
-            "id": 27,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/old/BrowserWindow.test.ts",
-            "start_line": 2120,
-            "end_line": 2120
+            "id": 93,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 32,
+            "end_line": 32
         },
         {
-            "id": 28,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/old/HTMLIFrameElement.test.ts",
-            "start_line": 256,
-            "end_line": 256
+            "id": 94,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 25,
+            "end_line": 25
         },
         {
-            "id": 29,
-            "message": "The origin of the received message is not checked. This means any site (even malicious) can send message to this window. If you don't expect this, consider checking the origin of sender.",
-            "cwe": "CWE-20",
-            "file": "file_downloads/capricorn86/old/HTMLIFrameElement.test.ts",
-            "start_line": 551,
-            "end_line": 551
+            "id": 95,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 35,
+            "end_line": 35
         },
         {
-            "id": 30,
-            "message": "Setting targetOrigin to \"*\" in postMessage may enable malicious parties to intercept the message. Consider using an exact target origin instead.",
-            "cwe": "CWE-942",
-            "file": "file_downloads/capricorn86/new/BrowserWindow.test.ts",
-            "start_line": 2157,
-            "end_line": 2157
+            "id": 96,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
+            "start_line": 33,
+            "end_line": 33
         },
         {
-            "id": 31,
-            "message": "Setting targetOrigin to \"*\" in postMessage may enable malicious parties to intercept the message. Consider using an exact target origin instead.",
-            "cwe": "CWE-942",
-            "file": "file_downloads/capricorn86/new/HTMLIFrameElement.test.ts",
-            "start_line": 254,
-            "end_line": 254
+            "id": 97,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 35,
+            "end_line": 35
         },
         {
-            "id": 32,
-            "message": "Setting targetOrigin to \"*\" in postMessage may enable malicious parties to intercept the message. Consider using an exact target origin instead.",
-            "cwe": "CWE-942",
-            "file": "file_downloads/capricorn86/old/BrowserWindow.test.ts",
-            "start_line": 2099,
-            "end_line": 2099
+            "id": 98,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 33,
+            "end_line": 33
         },
         {
-            "id": 33,
-            "message": "Setting targetOrigin to \"*\" in postMessage may enable malicious parties to intercept the message. Consider using an exact target origin instead.",
-            "cwe": "CWE-942",
-            "file": "file_downloads/capricorn86/old/HTMLIFrameElement.test.ts",
-            "start_line": 252,
-            "end_line": 252
+            "id": 99,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 38,
+            "end_line": 38
         },
         {
-            "id": 34,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 353,
-            "end_line": 353
+            "id": 100,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
+            "start_line": 29,
+            "end_line": 29
         },
         {
-            "id": 35,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 360,
-            "end_line": 360
+            "id": 101,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 38,
+            "end_line": 38
         },
         {
-            "id": 36,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 361,
-            "end_line": 361
-        },
-        {
-            "id": 37,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 366,
-            "end_line": 366
-        },
-        {
-            "id": 38,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 367,
-            "end_line": 367
-        },
-        {
-            "id": 39,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 368,
-            "end_line": 368
-        },
-        {
-            "id": 40,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 369,
-            "end_line": 369
-        },
-        {
-            "id": 41,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 375,
-            "end_line": 375
-        },
-        {
-            "id": 42,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 381,
-            "end_line": 381
-        },
-        {
-            "id": 43,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 387,
-            "end_line": 387
-        },
-        {
-            "id": 44,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 393,
-            "end_line": 393
-        },
-        {
-            "id": 45,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 394,
-            "end_line": 394
-        },
-        {
-            "id": 46,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 395,
-            "end_line": 395
-        },
-        {
-            "id": 47,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 401,
-            "end_line": 401
-        },
-        {
-            "id": 48,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 410,
-            "end_line": 410
-        },
-        {
-            "id": 49,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 415,
-            "end_line": 415
-        },
-        {
-            "id": 50,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 420,
-            "end_line": 420
-        },
-        {
-            "id": 51,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 422,
-            "end_line": 422
-        },
-        {
-            "id": 52,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 427,
-            "end_line": 427
-        },
-        {
-            "id": 53,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 428,
-            "end_line": 428
-        },
-        {
-            "id": 54,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 429,
-            "end_line": 429
-        },
-        {
-            "id": 55,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/new/Document.test.ts",
-            "start_line": 431,
-            "end_line": 431
-        },
-        {
-            "id": 56,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 351,
-            "end_line": 351
-        },
-        {
-            "id": 57,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 358,
-            "end_line": 358
-        },
-        {
-            "id": 58,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 359,
-            "end_line": 359
-        },
-        {
-            "id": 59,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 364,
-            "end_line": 364
-        },
-        {
-            "id": 60,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 365,
-            "end_line": 365
-        },
-        {
-            "id": 61,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 366,
-            "end_line": 366
-        },
-        {
-            "id": 62,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 367,
-            "end_line": 367
-        },
-        {
-            "id": 63,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 373,
-            "end_line": 373
-        },
-        {
-            "id": 64,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 379,
-            "end_line": 379
-        },
-        {
-            "id": 65,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 385,
-            "end_line": 385
-        },
-        {
-            "id": 66,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 391,
-            "end_line": 391
-        },
-        {
-            "id": 67,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 392,
-            "end_line": 392
-        },
-        {
-            "id": 68,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 393,
-            "end_line": 393
-        },
-        {
-            "id": 69,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 399,
-            "end_line": 399
-        },
-        {
-            "id": 70,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 408,
-            "end_line": 408
-        },
-        {
-            "id": 71,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 413,
-            "end_line": 413
-        },
-        {
-            "id": 72,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 418,
-            "end_line": 418
-        },
-        {
-            "id": 73,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 420,
-            "end_line": 420
-        },
-        {
-            "id": 74,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 425,
-            "end_line": 425
-        },
-        {
-            "id": 75,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 426,
-            "end_line": 426
-        },
-        {
-            "id": 76,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 427,
-            "end_line": 427
-        },
-        {
-            "id": 77,
-            "message": "Cookie misses the Secure attribute (it is false by default). Set it to true to protect the cookie from man-in-the-middle attacks.",
-            "cwe": "CWE-614",
-            "file": "file_downloads/capricorn86/old/Document.test.ts",
-            "start_line": 429,
-            "end_line": 429
+            "id": 102,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 29,
+            "end_line": 29
         }
     ]
 }
