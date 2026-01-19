@@ -30,4 +30,5 @@ run_step utils/read_semgrep.py
 run_step utils/read_snyk.py
 run_step utils/comparator.py
 run_step CWE_runner.py
+
 echo -e "${GREEN} All scripts completed successfully!${RESET}"

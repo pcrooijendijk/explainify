@@ -11,13 +11,13 @@
 
 ## Requirements
 
-For running this project, Ollama is required, which can be installed using the steps from [Ollama]([https://github.com/ollama/ollama?tab=readme-ov-file](https://github.com/ollama/ollama?tab=readme-ov-file)). Download Ollama for your OS and pull  `mistral:7b` with: 
+For running this project, Ollama is required, which can be installed using the steps from [Ollama](https://ollama.com/download). Download Ollama for your OS and pull  `mistral:7b` with: 
 
 ```
 ollama pull mistral:7b
 ```
 
-Then for getting the relevant lines of code from the vulnerable code files, [SemGrep](https://semgrep.dev) and [Snyk](https://snyk.io/platform/snyk-cli/) are used. To install them please refer to the documentation of [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) and [Snyk](https://docs.snyk.io/developer-tools/snyk-cli/install-or-update-the-snyk-cli) or use: 
+For getting the relevant lines of code from the vulnerable code files, [SemGrep](https://semgrep.dev) and [Snyk](https://snyk.io/platform/snyk-cli/) are used. To install them please refer to the documentation of [Semgrep](https://semgrep.dev/docs/getting-started/quickstart) and [Snyk](https://docs.snyk.io/developer-tools/snyk-cli/install-or-update-the-snyk-cli) or use: 
 
 ### Semgrep
 ```
@@ -37,6 +37,7 @@ semgrep login
 ### Snyk
 ```
 npm install snyk -g
+snyk auth
 ```
 
 Then use the following to start the scanning process for your vulnerable files: 
@@ -52,6 +53,7 @@ cd file_downloads/
 snyk code test --all-projects --json-file-output=vuln.json
 ```
 
+Finally for mining the NVD you need to request an API key on their [website](https://nvd.nist.gov/developers/request-an-api-key), and an API key for mining GitHub from their [website](https://github.com/settings/tokens). Both of these tokens need to be safed in a `.env` file as `GITHUB_TOKEN` and `NVD_KEY`.
 ---
 
 ## Installation
