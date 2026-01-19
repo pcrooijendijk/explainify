@@ -2,15 +2,17 @@ import sys
 import json
 import subprocess
 import os
-import ollama
 import logging
 import Semgrep
+from google import genai
+from dotenv import load_dotenv
+
+load_dotenv()
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+client = genai.Client(api_key=GOOGLE_API_KEY)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Configuration
-MODEL_NAME = "mistral:7b"
 
 # Prompt template
 SYSTEM_TEMPLATE = """
@@ -44,31 +46,20 @@ Now provide your explanation by filling in the following template:
 - Suggested fix: [do not mention the message, describe it as if you suggested the fix]
 """
 
-def call_mistral(system_prompt: str, user_prompt: str) -> str:       
-    try: 
-        model_name = "mistral:7b"
-        response = ollama.chat(
-            model=model_name,
-            messages=[
-                {
-                    'role': 'system',
-                    'content': system_prompt
-                },
-                {
-                    'role': 'user',
-                    'content': user_prompt
-                }
-            ],
-            options={
-                'temperature': 0.7,
-            }
+def call_gemini(system_prompt: str, user_prompt: str) -> str:
+    try:
+        full_prompt = f"{system_prompt}\n\n{user_prompt}"
+
+        response = client.models.generate_content(
+            model='gemini-2.0-flash', 
+            contents=full_prompt
         )
         
-        return response['message']['content']
+        return response.text
         
     except Exception as e:
-        logger.error(f"Error generating response: {str(e)}")
-        raise
+        logger.error(f"Error generating response from Gemini: {str(e)}")
+        return "Error generating explanation from AI."
 
 def run_semgrep(target_file):
     # Using full path to the output file, otherwise it's safed somewhere else
@@ -131,7 +122,7 @@ if __name__ == "__main__":
             )
             
             system_prompt = f"You are a security analyst or expert analyzing a code change."
-            explanation = call_mistral(system_prompt, user_prompt).lstrip()
+            explanation = call_gemini(system_prompt, user_prompt).lstrip()
             print(explanation)
 
             # This checks if the file name is already in the final results

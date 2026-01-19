@@ -5,14 +5,10 @@ import * as path from 'path';
 export function activate(context: vscode.ExtensionContext) {
 
     console.log('Semgrep-Mistral Extension is now active!');
-
-    // 1. Create a persistent Output Channel (Logs appear in the "Output" tab at the bottom)
     const outputChannel = vscode.window.createOutputChannel("Semgrep AI Analyzer");
-
-    // 2. Define Visual Style (Red wavy underline + text)
     const vulnerabilityDecorationType = vscode.window.createTextEditorDecorationType({
-        textDecoration: 'underline wavy red', 
-        overviewRulerColor: 'red',
+        textDecoration: 'underline wavy yellow', 
+        overviewRulerColor: 'yellow',
         overviewRulerLane: vscode.OverviewRulerLane.Right,
         after: {
             margin: '0 0 0 1em',
@@ -22,7 +18,6 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 
-    // 3. Register the Command
     let disposable = vscode.commands.registerCommand('semgrep-mistral-analyser.analyzeFile', () => {
         
         const editor = vscode.window.activeTextEditor;
@@ -32,17 +27,13 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         const filePath = editor.document.fileName;
-        
-        // Path to your python script inside the extension
         const scriptPath = path.join(context.extensionPath, 'scripts', 'analyze.py');
-
-        // Clear logs and show that we started
         outputChannel.clear();
         outputChannel.appendLine(`Starting analysis on: ${filePath}`);
 
         vscode.window.withProgress({
             location: vscode.ProgressLocation.Notification,
-            title: "Running Vulnerability Analysis...",
+            title: "Running Semgrep & AI Analysis...",
             cancellable: false
         }, async (progress) => {
             
@@ -53,81 +44,110 @@ export function activate(context: vscode.ExtensionContext) {
 
                 exec(pythonCommand, (error, stdout, stderr) => {
                     
-                    // Log any stderr (debug info) to the output panel
-                    if (stderr) {
-                        outputChannel.appendLine(`[Python Log]: ${stderr}`);
-                    }
+                    if (stderr) outputChannel.appendLine(`[Python Log]: ${stderr}`);
 
-                    // If error exists but no stdout, it's a critical failure
-                    if (error && !stdout) {
+                    if (error) {
                         const errorMsg = `Analysis execution failed: ${error.message}`;
-                        vscode.window.showErrorMessage(errorMsg);
+                        vscode.window.showErrorMessage("Analysis failed. Check Output panel.");
                         outputChannel.appendLine(`${errorMsg}`);
+                        outputChannel.show(true); 
                         resolve();
                         return;
                     }
 
                     try {
-                        // --- SMART JSON PARSING START ---
-                        // We ignore everything before the first '[' and after the last ']'
-                        // This filters out "ApplicationInsights" or other noisy logs
-                        const firstBracket = stdout.indexOf('[');
-                        const lastBracket = stdout.lastIndexOf(']');
+                        const firstOpen = stdout.search(/[\[\{]/); 
+                        const lastClose = stdout.search(/[\]\}][^\]\}]*$/); 
 
-                        if (firstBracket === -1 || lastBracket === -1) {
-                            throw new Error("No valid JSON array found in Python output.");
+                        if (firstOpen === -1 || lastClose === -1) {
+                            if (stdout.trim() === "[]" || stdout.trim() === "{}") {
+                            } else {
+                                throw new Error("No valid JSON brackets found in output.");
+                            }
                         }
 
-                        const cleanJson = stdout.substring(firstBracket, lastBracket + 1);
-                        outputChannel.appendLine("Valid JSON detected. Parsing...");
+                        let findings: any[] = [];
                         
-                        const findings = JSON.parse(cleanJson);
-                        // --- SMART JSON PARSING END ---
-                        
+                        if (firstOpen !== -1 && lastClose !== -1) {
+                            const cleanJson = stdout.substring(firstOpen, lastClose + 1);
+                            outputChannel.appendLine("Valid JSON structure detected. Parsing...");
+                            const parsedData = JSON.parse(cleanJson);
+
+                            if (Array.isArray(parsedData)) {
+                                findings = parsedData;
+                            } else if (typeof parsedData === 'object' && parsedData !== null) {
+                                outputChannel.appendLine("Detected Dictionary format. Flattening...");
+                                Object.values(parsedData).forEach((val: any) => {
+                                    if (Array.isArray(val)) {
+                                        findings = findings.concat(val);
+                                    }
+                                });
+                            }
+                        }
+
+                        outputChannel.clear();
                         if (findings.length === 0) {
+                            outputChannel.appendLine("Analysis Complete: No issues found.");
                             vscode.window.showInformationMessage("No vulnerabilities found!");
-                            editor.setDecorations(vulnerabilityDecorationType, []); 
+                            editor.setDecorations(vulnerabilityDecorationType, []);
+                            outputChannel.show(true);
                             resolve();
                             return;
                         }
 
-                        // Create decorations (highlights)
+                        // // Print Findings to Output Panel
+                        // findings.forEach((finding: any, index: number) => {
+                        //     const line = finding.line || finding.start_line || "Unknown";
+                        //     const rule = finding.message || "Unknown Rule";
+                        //     const explanation = finding.ai_explanation || "No AI explanation available.";
+                            
+                        //     outputChannel.appendLine(`🔴 Issue #${index + 1} at Line ${line}:`);
+                        //     outputChannel.appendLine(`   Rule: ${rule}`);
+                        //     outputChannel.appendLine(`   ---------------------------------------------------`);
+                        //     outputChannel.appendLine(`   🤖 AI Fix:`);
+                        //     outputChannel.appendLine(`   ${explanation.replace(/\n/g, '\n   ')}`); 
+                        //     outputChannel.appendLine("===================================================\n");
+                        // });
+
+                        // outputChannel.show(true);
                         const decorations: vscode.DecorationOptions[] = [];
 
                         findings.forEach((finding: any) => {
-                            // VS Code uses 0-based indexing, Semgrep uses 1-based
-                            const startLine = finding.line - 1;
-                            const endLine = finding.endLine ? finding.endLine - 1 : startLine;
-                            
+                            const rawLine = finding.line || finding.start_line || 1;
+                            const startLine = Math.max(0, rawLine - 1); 
+                            const rawEndLine = finding.endLine || finding.end_line || rawLine;
+                            const endLine = Math.max(startLine, rawEndLine - 1);
+
                             const range = new vscode.Range(startLine, 0, endLine, 1000);
                             
+                            const message = finding.message || "Potential Issue";
+                            const explanation = finding.ai_explanation || "No explanation provided.";
+							const vulnerability = finding.vulnerability;
+
                             const decoration: vscode.DecorationOptions = {
                                 range: range,
                                 renderOptions: {
                                     after: {
-                                        contentText: ` [${finding.vulnerability}]` 
+                                        contentText: ` [${vulnerability}]` 
                                     }
                                 },
-                                // The tooltip when hovering over the red line
                                 hoverMessage: new vscode.MarkdownString(`
 ### AI Explanation:
-${finding.ai_explanation}
+${explanation}
                                 `)
                             };
-                            
                             decorations.push(decoration);
                         });
 
                         editor.setDecorations(vulnerabilityDecorationType, decorations);
-                        const successMsg = `Found ${findings.length} issues.`;
-                        vscode.window.showInformationMessage(successMsg);
-                        outputChannel.appendLine(`${successMsg}`);
+                        vscode.window.showInformationMessage(`Found ${findings.length} issues.`);
 
                     } catch (e: any) {
                         const failMsg = "Failed to parse analysis results. Check Output panel.";
                         vscode.window.showErrorMessage(failMsg);
+                        outputChannel.show(true);
                         outputChannel.appendLine(`Parse Error: ${e.message}`);
-                        outputChannel.appendLine(`Raw Output causing error:\n${stdout}`);
+                        outputChannel.appendLine(`Raw Output causing error:\n"${stdout}"`);
                     }
                     resolve();
                 });
