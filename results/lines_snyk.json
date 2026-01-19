@@ -1,1060 +1,832 @@
 {
-    "wneessen": [
+    "minio": [
         {
             "id": 1,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 362,
-            "end_line": 362
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1437,
+            "end_line": 1437
         },
         {
             "id": 2,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 380,
-            "end_line": 380
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1583,
+            "end_line": 1583
         },
         {
             "id": 3,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 381,
-            "end_line": 381
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1735,
+            "end_line": 1735
         },
         {
             "id": 4,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 388,
-            "end_line": 388
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1912,
+            "end_line": 1912
         },
         {
             "id": 5,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 398,
-            "end_line": 398
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2015,
+            "end_line": 2015
         },
         {
             "id": 6,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 399,
-            "end_line": 399
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2114,
+            "end_line": 2114
         },
         {
             "id": 7,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 517,
-            "end_line": 517
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2203,
+            "end_line": 2203
         },
         {
             "id": 8,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 535,
-            "end_line": 535
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1331,
+            "end_line": 1331
         },
         {
             "id": 9,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 536,
-            "end_line": 536
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1477,
+            "end_line": 1477
         },
         {
             "id": 10,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 543,
-            "end_line": 543
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1629,
+            "end_line": 1629
         },
         {
             "id": 11,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 553,
-            "end_line": 553
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1806,
+            "end_line": 1806
         },
         {
             "id": 12,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 554,
-            "end_line": 554
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1909,
+            "end_line": 1909
         },
         {
             "id": 13,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 674,
-            "end_line": 674
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2008,
+            "end_line": 2008
         },
         {
             "id": 14,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode passwords in code. Found hardcoded saved in LDAPPassword.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 822,
-            "end_line": 822
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2097,
+            "end_line": 2097
         },
         {
             "id": 15,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 361,
-            "end_line": 361
+            "file": "file_downloads/minio/new/admin-handlers-users_test.go",
+            "start_line": 1314,
+            "end_line": 1314
         },
         {
             "id": 16,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 379,
-            "end_line": 379
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 124,
+            "end_line": 124
         },
         {
             "id": 17,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 380,
-            "end_line": 380
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 344,
+            "end_line": 344
         },
         {
             "id": 18,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 387,
-            "end_line": 387
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2175,
+            "end_line": 2175
         },
         {
             "id": 19,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 397,
-            "end_line": 397
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 122,
+            "end_line": 122
         },
         {
             "id": 20,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in User.",
             "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 398,
-            "end_line": 398
-        },
-        {
-            "id": 21,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 516,
-            "end_line": 516
-        },
-        {
-            "id": 22,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 534,
-            "end_line": 534
-        },
-        {
-            "id": 23,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 535,
-            "end_line": 535
-        },
-        {
-            "id": 24,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 542,
-            "end_line": 542
-        },
-        {
-            "id": 25,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 552,
-            "end_line": 552
-        },
-        {
-            "id": 26,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 553,
-            "end_line": 553
-        },
-        {
-            "id": 27,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 673,
-            "end_line": 673
-        },
-        {
-            "id": 28,
-            "message": "Do not hardcode passwords in code. Found hardcoded saved in pass.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 821,
-            "end_line": 821
-        },
-        {
-            "id": 29,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 361,
-            "end_line": 361
-        },
-        {
-            "id": 30,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 380,
-            "end_line": 380
-        },
-        {
-            "id": 31,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 381,
-            "end_line": 381
-        },
-        {
-            "id": 32,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 387,
-            "end_line": 387
-        },
-        {
-            "id": 33,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 398,
-            "end_line": 398
-        },
-        {
-            "id": 34,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 399,
-            "end_line": 399
-        },
-        {
-            "id": 35,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 516,
-            "end_line": 516
-        },
-        {
-            "id": 36,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 535,
-            "end_line": 535
-        },
-        {
-            "id": 37,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 536,
-            "end_line": 536
-        },
-        {
-            "id": 38,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 542,
-            "end_line": 542
-        },
-        {
-            "id": 39,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 553,
-            "end_line": 553
-        },
-        {
-            "id": 40,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 554,
-            "end_line": 554
-        },
-        {
-            "id": 41,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 673,
-            "end_line": 673
-        },
-        {
-            "id": 42,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 821,
-            "end_line": 821
-        },
-        {
-            "id": 43,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 360,
-            "end_line": 360
-        },
-        {
-            "id": 44,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 379,
-            "end_line": 379
-        },
-        {
-            "id": 45,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 380,
-            "end_line": 380
-        },
-        {
-            "id": 46,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 386,
-            "end_line": 386
-        },
-        {
-            "id": 47,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 397,
-            "end_line": 397
-        },
-        {
-            "id": 48,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 398,
-            "end_line": 398
-        },
-        {
-            "id": 49,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 515,
-            "end_line": 515
-        },
-        {
-            "id": 50,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 534,
-            "end_line": 534
-        },
-        {
-            "id": 51,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 535,
-            "end_line": 535
-        },
-        {
-            "id": 52,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 541,
-            "end_line": 541
-        },
-        {
-            "id": 53,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 552,
-            "end_line": 552
-        },
-        {
-            "id": 54,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 553,
-            "end_line": 553
-        },
-        {
-            "id": 55,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 672,
-            "end_line": 672
-        },
-        {
-            "id": 56,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in user.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 820,
-            "end_line": 820
-        },
-        {
-            "id": 100,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in username.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 1287,
-            "end_line": 1287
-        },
-        {
-            "id": 101,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in username.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/new/smtp_test.go",
-            "start_line": 1310,
-            "end_line": 1310
-        },
-        {
-            "id": 102,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in username.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 1286,
-            "end_line": 1286
-        },
-        {
-            "id": 103,
-            "message": "Do not hardcode credentials in code. Found hardcoded credential used in username.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/wneessen/old/smtp_test.go",
-            "start_line": 1309,
-            "end_line": 1309
-        }
-    ],
-    "danny-avila": [
-        {
-            "id": 57,
-            "message": "Unsanitized input from an uploaded file flows into fs.promises.unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/danny-avila/new/v1.js",
-            "start_line": 458,
-            "end_line": 458
-        },
-        {
-            "id": 58,
-            "message": "Unsanitized input from an uploaded file flows into fs.promises.unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/danny-avila/old/v1.js",
-            "start_line": 449,
-            "end_line": 449
-        },
-        {
-            "id": 114,
-            "message": "The type of this object, coming from body and the value of its length property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
-            "cwe": "CWE-1287",
-            "file": "file_downloads/danny-avila/old/v1.js",
-            "start_line": 174,
-            "end_line": 174
-        },
-        {
-            "id": 115,
-            "message": "The type of this object, coming from body and the value of its length property can be controlled by the user. An attacker may craft the properties of the object to crash the application or bypass its logic. Consider checking the type of the object.",
-            "cwe": "CWE-1287",
-            "file": "file_downloads/danny-avila/old/v1.js",
-            "start_line": 174,
-            "end_line": 174
-        },
-        {
-            "id": 128,
-            "message": "Expensive operation (a file system operation) is performed by an endpoint handler which does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
-            "cwe": "CWE-770",
-            "file": "file_downloads/danny-avila/new/v1.js",
-            "start_line": 386,
-            "end_line": 464
-        },
-        {
-            "id": 129,
-            "message": "Expensive operation (a file system operation) is performed by an endpoint handler which does not use a rate-limiting mechanism. It may enable the attackers to perform Denial-of-service attacks. Consider using a rate-limiting middleware such as express-limit.",
-            "cwe": "CWE-770",
-            "file": "file_downloads/danny-avila/old/v1.js",
-            "start_line": 377,
-            "end_line": 455
-        },
-        {
-            "id": 130,
-            "message": "Unsanitized input from an uploaded file flows into fs.promises.readFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/danny-avila/new/v1.js",
-            "start_line": 394,
-            "end_line": 394
-        },
-        {
-            "id": 131,
-            "message": "Unsanitized input from an uploaded file flows into fs.promises.readFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/danny-avila/old/v1.js",
-            "start_line": 385,
-            "end_line": 385
-        }
-    ],
-    "FreshRSS": [
-        {
-            "id": 59,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/fever.php",
-            "start_line": 161,
-            "end_line": 161
-        },
-        {
-            "id": 60,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 194,
-            "end_line": 194
-        },
-        {
-            "id": 61,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 219,
-            "end_line": 219
-        },
-        {
-            "id": 62,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 241,
-            "end_line": 241
-        },
-        {
-            "id": 63,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 257,
-            "end_line": 257
-        },
-        {
-            "id": 64,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 42,
-            "end_line": 42
-        },
-        {
-            "id": 65,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/fever.php",
-            "start_line": 159,
-            "end_line": 159
-        },
-        {
-            "id": 66,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/greader.php",
-            "start_line": 191,
-            "end_line": 191
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 2069,
+            "end_line": 2069
         },
         {
             "id": 67,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/greader.php",
-            "start_line": 216,
-            "end_line": 216
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1457,
+            "end_line": 1457
         },
         {
             "id": 68,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/greader.php",
-            "start_line": 238,
-            "end_line": 238
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1758,
+            "end_line": 1758
         },
         {
             "id": 69,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
-            "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/greader.php",
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 1901,
+            "end_line": 1901
+        },
+        {
+            "id": 70,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/new/sts-handlers_test.go",
+            "start_line": 2004,
+            "end_line": 2004
+        },
+        {
+            "id": 71,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1351,
+            "end_line": 1351
+        },
+        {
+            "id": 72,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1652,
+            "end_line": 1652
+        },
+        {
+            "id": 73,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1795,
+            "end_line": 1795
+        },
+        {
+            "id": 74,
+            "message": "Do not hardcode credentials in code. Found hardcoded credential used in _.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/minio/old/sts-handlers_test.go",
+            "start_line": 1898,
+            "end_line": 1898
+        }
+    ],
+    "strapi": [
+        {
+            "id": 21,
+            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in bcryptjs.compareSync.",
+            "cwe": "CWE-547",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 22,
+            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in bcryptjs.compareSync.",
+            "cwe": "CWE-547",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 23,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 16,
+            "end_line": 16
+        },
+        {
+            "id": 24,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 93,
+            "end_line": 93
+        },
+        {
+            "id": 25,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 145,
+            "end_line": 145
+        },
+        {
+            "id": 26,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 178,
+            "end_line": 178
+        },
+        {
+            "id": 27,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 211,
+            "end_line": 211
+        },
+        {
+            "id": 28,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
             "start_line": 254,
             "end_line": 254
         },
         {
-            "id": 70,
-            "message": "SHA1 hash (used in sha1) is insecure. Consider changing it to a secure hashing algorithm.",
+            "id": 29,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 297,
+            "end_line": 297
+        },
+        {
+            "id": 30,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 364,
+            "end_line": 364
+        },
+        {
+            "id": 31,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 373,
+            "end_line": 373
+        },
+        {
+            "id": 32,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 382,
+            "end_line": 382
+        },
+        {
+            "id": 33,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 16,
+            "end_line": 16
+        },
+        {
+            "id": 34,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 90,
+            "end_line": 90
+        },
+        {
+            "id": 35,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 122,
+            "end_line": 122
+        },
+        {
+            "id": 36,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 155,
+            "end_line": 155
+        },
+        {
+            "id": 37,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 188,
+            "end_line": 188
+        },
+        {
+            "id": 38,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 231,
+            "end_line": 231
+        },
+        {
+            "id": 39,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.js",
+            "start_line": 274,
+            "end_line": 274
+        },
+        {
+            "id": 40,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in newPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 20,
+            "end_line": 20
+        },
+        {
+            "id": 41,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in newPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 20,
+            "end_line": 20
+        },
+        {
+            "id": 42,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 61,
+            "end_line": 61
+        },
+        {
+            "id": 43,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 365,
+            "end_line": 365
+        },
+        {
+            "id": 44,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 374,
+            "end_line": 374
+        },
+        {
+            "id": 45,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.js",
+            "start_line": 383,
+            "end_line": 383
+        },
+        {
+            "id": 46,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in passwordConfirmation.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 61,
+            "end_line": 61
+        },
+        {
+            "id": 47,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in currentPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/new/auth.test.api.js",
+            "start_line": 78,
+            "end_line": 78
+        },
+        {
+            "id": 48,
+            "message": "Do not hardcode passwords in code. Found hardcoded password used in currentPassword.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/strapi/old/auth.test.api.js",
+            "start_line": 78,
+            "end_line": 78
+        }
+    ],
+    "sagemathinc": [
+        {
+            "id": 49,
+            "message": "Unsanitized input from an HTTP parameter flows into write, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/new/handle-request.ts",
+            "start_line": 130,
+            "end_line": 130
+        },
+        {
+            "id": 50,
+            "message": "Unsanitized input from an HTTP parameter flows into write, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/old/handle-request.ts",
+            "start_line": 124,
+            "end_line": 124
+        },
+        {
+            "id": 51,
+            "message": "Unsanitized input from the request URL flows into end, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/new/handle-request.ts",
+            "start_line": 186,
+            "end_line": 186
+        },
+        {
+            "id": 52,
+            "message": "Unsanitized input from the request URL flows into end, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
+            "cwe": "CWE-79",
+            "file": "file_downloads/sagemathinc/old/handle-request.ts",
+            "start_line": 180,
+            "end_line": 180
+        }
+    ],
+    "MacWarrior": [
+        {
+            "id": 53,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
             "cwe": "CWE-916",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 41,
-            "end_line": 41
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1391,
+            "end_line": 1391
         },
         {
-            "id": 73,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/f.php",
-            "start_line": 40,
-            "end_line": 40
+            "id": 54,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1569,
+            "end_line": 1569
         },
         {
-            "id": 74,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
+            "id": 55,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 1827,
+            "end_line": 1827
+        },
+        {
+            "id": 56,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1391,
+            "end_line": 1391
+        },
+        {
+            "id": 57,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1569,
+            "end_line": 1569
+        },
+        {
+            "id": 58,
+            "message": "MD5 hash (used in md5) is insecure. Consider changing it to a secure hashing algorithm.",
+            "cwe": "CWE-916",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 1827,
+            "end_line": 1827
+        },
+        {
+            "id": 59,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
             "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/fever.php",
-            "start_line": 161,
-            "end_line": 161
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 3196,
+            "end_line": 3196
+        },
+        {
+            "id": 60,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/new/user.class.php",
+            "start_line": 3322,
+            "end_line": 3322
+        },
+        {
+            "id": 61,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3192,
+            "end_line": 3192
+        },
+        {
+            "id": 62,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3196,
+            "end_line": 3196
+        },
+        {
+            "id": 63,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 3322,
+            "end_line": 3322
+        },
+        {
+            "id": 64,
+            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "cwe": "CWE-23",
+            "file": "file_downloads/MacWarrior/old/user.class.php",
+            "start_line": 4673,
+            "end_line": 4673
+        }
+    ],
+    "blakeblackshear": [
+        {
+            "id": 65,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.Popen, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 616,
+            "end_line": 635
+        },
+        {
+            "id": 66,
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.Popen, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 616,
+            "end_line": 635
         },
         {
             "id": 75,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 29,
-            "end_line": 29
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1234,
+            "end_line": 1256
         },
         {
             "id": 76,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/f.php",
-            "start_line": 37,
-            "end_line": 37
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1302,
+            "end_line": 1323
         },
         {
             "id": 77,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/fever.php",
-            "start_line": 159,
-            "end_line": 159
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1408,
+            "end_line": 1429
         },
         {
             "id": 78,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 28,
-            "end_line": 28
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/new/media.py",
+            "start_line": 1474,
+            "end_line": 1493
         },
         {
             "id": 79,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/ext.php",
-            "start_line": 109,
-            "end_line": 109
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1234,
+            "end_line": 1256
         },
         {
             "id": 80,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/f.php",
-            "start_line": 69,
-            "end_line": 69
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1302,
+            "end_line": 1323
         },
         {
             "id": 81,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/ext.php",
-            "start_line": 107,
-            "end_line": 107
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1408,
+            "end_line": 1429
         },
         {
             "id": 82,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/f.php",
-            "start_line": 67,
-            "end_line": 67
-        },
+            "message": "Unsanitized input from an HTTP parameter flows into subprocess.run, where it is used as a shell command. This may result in a Command Injection vulnerability.",
+            "cwe": "CWE-78",
+            "file": "file_downloads/blakeblackshear/old/media.py",
+            "start_line": 1474,
+            "end_line": 1493
+        }
+    ],
+    "in-toto": [
         {
             "id": 83,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
+            "message": "Unsanitized input from a CLI argument flows into os.ReadFile, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
             "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 46,
-            "end_line": 46
-        },
+            "file": "file_downloads/in-toto/new/main.go",
+            "start_line": 192,
+            "end_line": 192
+        }
+    ],
+    "opensearch-project": [
         {
             "id": 84,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "message": "Do not hardcode credentials in code.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/opensearch-project/new/ConnectionConfigurationTests.java",
             "start_line": 61,
             "end_line": 61
         },
         {
             "id": 85,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 45,
-            "end_line": 45
-        },
-        {
-            "id": 86,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to delete arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 60,
-            "end_line": 60
-        },
-        {
-            "id": 87,
-            "message": "An exception object flows to die/exit and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 484,
-            "end_line": 484
-        },
-        {
-            "id": 88,
-            "message": "An exception object flows to die/exit and is leaked to the attacker. This may disclose important information about the application to an attacker.",
-            "cwe": "CWE-200",
-            "file": "file_downloads/FreshRSS/old/greader.php",
-            "start_line": 481,
-            "end_line": 481
-        },
-        {
-            "id": 89,
-            "message": "Unsanitized input from an HTTP parameter flows into prepare, where it is used in an SQL query. This may result in an SQL Injection vulnerability.",
-            "cwe": "CWE-89",
-            "file": "file_downloads/FreshRSS/old/fever.php",
-            "start_line": 117,
-            "end_line": 117
-        },
-        {
-            "id": 90,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/new/f.php",
-            "start_line": 40,
-            "end_line": 40
-        },
-        {
-            "id": 91,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 29,
-            "end_line": 29
-        },
-        {
-            "id": 92,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/old/f.php",
-            "start_line": 37,
-            "end_line": 37
-        },
-        {
-            "id": 93,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 28,
-            "end_line": 28
-        },
-        {
-            "id": 94,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/new/f.php",
-            "start_line": 69,
-            "end_line": 69
-        },
-        {
-            "id": 95,
-            "message": "Unsanitized input from an HTTP parameter flows into readfile, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/old/f.php",
-            "start_line": 67,
-            "end_line": 67
-        },
-        {
-            "id": 96,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 46,
-            "end_line": 46
-        },
-        {
-            "id": 97,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
+            "message": "Do not hardcode credentials in code.",
+            "cwe": "CWE-798",
+            "file": "file_downloads/opensearch-project/old/ConnectionConfigurationTests.java",
             "start_line": 61,
             "end_line": 61
         },
         {
-            "id": 98,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 45,
-            "end_line": 45
+            "id": 86,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/CustomClientSslEngineFactory.java",
+            "start_line": 43,
+            "end_line": 43
         },
         {
-            "id": 99,
-            "message": "Unsanitized input from an HTTP parameter flows into unlink, where it is used as an URL to perform a request. This may result in a Server-Side Request Forgery vulnerability.",
-            "cwe": "CWE-918",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 60,
-            "end_line": 60
+            "id": 87,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 44,
+            "end_line": 44
         },
         {
-            "id": 104,
-            "message": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
-            "cwe": "CWE-942",
-            "file": "file_downloads/FreshRSS/new/greader.php",
-            "start_line": 997,
-            "end_line": 997
+            "id": 88,
+            "message": "Implement secure HTTPS communication. Consider using latest TLS version instead of SSL.",
+            "cwe": "CWE-326",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 42,
+            "end_line": 42
         },
         {
-            "id": 105,
-            "message": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
-            "cwe": "CWE-942",
-            "file": "file_downloads/FreshRSS/new/query.php",
-            "start_line": 171,
-            "end_line": 171
+            "id": 89,
+            "message": "The verify method always returns true, which means that any hostname is accepted. Such behaviour is insecure.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 48,
+            "end_line": 48
         },
         {
-            "id": 106,
-            "message": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
-            "cwe": "CWE-942",
-            "file": "file_downloads/FreshRSS/old/greader.php",
-            "start_line": 994,
-            "end_line": 994
+            "id": 90,
+            "message": "The verify method always returns true, which means that any hostname is accepted. Such behaviour is insecure.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 48,
+            "end_line": 48
         },
         {
-            "id": 107,
-            "message": "Setting Access-Control-Allow-Origin header to \"*\" in header might be too permissive. This allows malicious code on other domains to communicate with the application, which is a security risk",
-            "cwe": "CWE-942",
-            "file": "file_downloads/FreshRSS/old/query.php",
-            "start_line": 168,
-            "end_line": 168
+            "id": 91,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 32,
+            "end_line": 32
         },
         {
-            "id": 108,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 34,
-            "end_line": 34
+            "id": 92,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
+            "start_line": 25,
+            "end_line": 25
         },
         {
-            "id": 109,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 83,
-            "end_line": 83
+            "id": 93,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 32,
+            "end_line": 32
         },
         {
-            "id": 110,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/new/pshb.php",
-            "start_line": 89,
-            "end_line": 89
+            "id": 94,
+            "message": "TrustManager might be too permissive: all Certificate Authorities are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 25,
+            "end_line": 25
         },
         {
-            "id": 111,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
+            "id": 95,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 35,
+            "end_line": 35
+        },
+        {
+            "id": 96,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
             "start_line": 33,
             "end_line": 33
         },
         {
-            "id": 112,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 82,
-            "end_line": 82
+            "id": 97,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 35,
+            "end_line": 35
         },
         {
-            "id": 113,
-            "message": "Unsanitized input from an HTTP parameter flows into die/exit, where it is used to render an HTML page returned to the user. This may result in a Cross-Site Scripting attack (XSS).",
-            "cwe": "CWE-79",
-            "file": "file_downloads/FreshRSS/old/pshb.php",
-            "start_line": 88,
-            "end_line": 88
-        }
-    ],
-    "DataTables": [
-        {
-            "id": 71,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/DataTables/new/examples.php",
-            "start_line": 4,
-            "end_line": 4
+            "id": 98,
+            "message": "TrustManager might be too permissive: all servers are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 33,
+            "end_line": 33
         },
         {
-            "id": 72,
-            "message": "Unsanitized input from an HTTP parameter flows into file_get_contents, where it is used as a path. This may result in a Path Traversal vulnerability and allow an attacker to read arbitrary files.",
-            "cwe": "CWE-23",
-            "file": "file_downloads/DataTables/old/examples.php",
-            "start_line": 4,
-            "end_line": 4
-        }
-    ],
-    "formbricks": [
-        {
-            "id": 116,
-            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in authorize.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/authOptions.test.ts",
-            "start_line": 255,
-            "end_line": 255
+            "id": 99,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/DBSource.java",
+            "start_line": 38,
+            "end_line": 38
         },
         {
-            "id": 117,
-            "message": "Avoid hardcoding values that are meant to be secret. Found a hardcoded string used in authorize.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/old/authOptions.test.ts",
-            "start_line": 255,
-            "end_line": 255
+            "id": 100,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/new/InsecureSslEngineFactory.java",
+            "start_line": 29,
+            "end_line": 29
         },
         {
-            "id": 118,
-            "message": "Hardcoded value is used as a cipher key (in @/lib/crypto.createHmac). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 19,
-            "end_line": 19
+            "id": 101,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/DBSource.java",
+            "start_line": 38,
+            "end_line": 38
         },
         {
-            "id": 119,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 20,
-            "end_line": 20
-        },
-        {
-            "id": 120,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 104,
-            "end_line": 104
-        },
-        {
-            "id": 121,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 339,
-            "end_line": 339
-        },
-        {
-            "id": 122,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 350,
-            "end_line": 350
-        },
-        {
-            "id": 123,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 361,
-            "end_line": 361
-        },
-        {
-            "id": 124,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 446,
-            "end_line": 446
-        },
-        {
-            "id": 125,
-            "message": "Hardcoded value is used as a cipher key (in jsonwebtoken.default.sign). Generate the value with a cryptographically strong random number generator and do not hardcode it in source code.",
-            "cwe": "CWE-547",
-            "file": "file_downloads/formbricks/new/jwt.test.ts",
-            "start_line": 916,
-            "end_line": 916
-        },
-        {
-            "id": 126,
-            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/formbricks/new/authOptions.test.ts",
-            "start_line": 137,
-            "end_line": 137
-        },
-        {
-            "id": 127,
-            "message": "Do not hardcode passwords in code. Found hardcoded password used in password.",
-            "cwe": "CWE-798",
-            "file": "file_downloads/formbricks/old/authOptions.test.ts",
-            "start_line": 137,
-            "end_line": 137
+            "id": 102,
+            "message": "TrustManager might be too permissive: all clients are trusted.",
+            "cwe": "CWE-295",
+            "file": "file_downloads/opensearch-project/old/InsecureSslEngineFactory.java",
+            "start_line": 29,
+            "end_line": 29
         }
     ]
 }

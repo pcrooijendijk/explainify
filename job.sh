@@ -16,11 +16,15 @@ run_step() {
     fi
 }
 
-run_step get_CWE.py
-# Running the root cause analysis using both Semgrep and Snyk
-cd file_downloads/
-semgrep scan --verbose --no-git-ignore --json --output results/semgrep_results.json
-snyk code test --all-projects --json-file-output=vuln.json
+# run_step get_CWE.py
+# # Running the root cause analysis using both Semgrep and Snyk
+# cd file_downloads/
+# semgrep scan --verbose --no-git-ignore --json --output semgrep_results.json
+# mv semgrep_results.json ./results
+# snyk code test --all-projects --json-file-output=vuln.json
+# mv vuln.json ./results
+
+# cd ../
 
 run_step utils/read_semgrep.py
 run_step utils/read_snyk.py

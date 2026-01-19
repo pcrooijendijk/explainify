@@ -40,6 +40,19 @@ npm install snyk -g
 snyk auth
 ```
 
+Then use the following to start the scanning process for your vulnerable files: 
+### Semgrep
+```
+cd file_downloads/
+semgrep scan --verbose --no-git-ignore --json --output ./results/semgrep_results.json
+```
+
+### Snyk
+```
+cd file_downloads/
+snyk code test --all-projects --json-file-output=vuln.json
+```
+
 Finally for mining the NVD you need to request an API key on their [website](https://nvd.nist.gov/developers/request-an-api-key), and an API key for mining GitHub from their [website](https://github.com/settings/tokens). Both of these tokens need to be safed in a `.env` file as `GITHUB_TOKEN` and `NVD_KEY`.
 ---
 
