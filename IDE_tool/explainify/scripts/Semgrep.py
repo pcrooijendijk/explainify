@@ -21,7 +21,7 @@ class Semgrep:
                 "start_line": result['start'], 
                 "end_line": result['end'],
                 "message": result['extra']['message'],
-                "vuln_ids": result['extra']['metadata'].get('cwe') 
+                "vuln_ids": result['extra']['metadata'].get('cwe')
             }
 
             if file_name not in self.result_list:

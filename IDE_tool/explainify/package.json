@@ -1,7 +1,7 @@
 {
-  "name": "semgrep-mistral-analyser",
-  "displayName": "Semgrep Mistral Analyser",
-  "description": "AI-powered security analysis",
+  "name": "explainify",
+  "displayName": "Explainify",
+  "description": "AI-powered vulnerability analysis",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.80.0"
@@ -15,8 +15,15 @@
   "contributes": {
     "commands": [
       {
-        "command": "semgrep-mistral-analyser.analyzeFile",
-        "title": "Analyze File with Semgrep & AI"
+        "command": "explainify.analyzeWorkspace",
+        "title": "Analyze File for Vulnerabilities"
+      }
+    ],
+    "themes": [
+      {
+        "label": "Explainify Bright Warnings",
+        "uiTheme": "vs-dark",
+        "path": "./themes/explainify-theme.json"
       }
     ]
   },
