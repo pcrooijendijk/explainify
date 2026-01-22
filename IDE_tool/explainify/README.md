@@ -1,71 +1,58 @@
-# explainify README
+# Explainify: A Static Analysis Framework utilizing Large Language Models for Explaining Vulnerabilities
 
-This is the README for your extension "explainify". After writing up a brief description, we recommend including the following sections.
+## Overview
 
-## Features
+**Explainify** is an Integrated Development Environment (IDE) extension designed to expalin the outcomes of Static Application Security Testing (SAST). This framework integrates **Semgrep** which is a static analysis tool, with **Google Gemini**, a Large Language Model (LLM). The system automates the detection of security flaws and augments them with explanations, risk assessments, and remediation strategies directly within the developer's workspace.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 1\. System Overview
 
-For example if there is an image subfolder under your extension project workspace:
+The framework operates as a Visual Studio Code extension where:
 
-\!\[feature X\]\(images/feature-x.png\)
+1.  The system starts with a workspace-wide scan using the Semgrep CLI to identify potential vulnerabilities based on semantic code patterns.
+2.  A prompt, containing the vulnerability metadata and code context, is send to Gemini.
+3.  The LLM's response is parsed and mapped back to the source code, providing inline visual cues and detailed diagnostic reports.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## 2\. Key Capabilities
 
-## Requirements
+The tool perfroms an alaysis of the active project, supporting the anlaysis of multiple files. It uses an LLM to analyze specific details and explains why the vulnerability is present given a predefined template. Some visualization is applied such as yellow underlinings to highlight vulnerable code segments and file names are highlighted which allows rapid identificiation of vulnerable files within the project. 
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 3\. Requirements
 
-## Extension Settings
+### Installation
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1.  Clone or download the repository:
 
-For example:
+```
+git clone explainify
+cd explainify
+```
 
-This extension contributes the following settings:
+1.  Install the requirements:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+```
+pip install -r requirements.txt
+```
 
-## Known Issues
+### Semgrep
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+```
+# Install through homebrew for macOS
+brew install semgrep
 
-## Release Notes
+# Install through pip
+python3 -m pip install semgrep
 
-Users appreciate release notes as you update your extension.
+# Confirm installation succeeded by printing the currently installed version
+semgrep --version
 
-### 1.0.0
+# Login to semgrep 
+semgrep login
+```
 
-Initial release of ...
+### LLM API key
 
-### 1.0.1
+To run this extension, a valid Google Gemini key is required which needs to be in a file named `.env` and define the API key as follows:
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+```
+GOOGLE_API_KEY=your_api_key_here
+```
