@@ -1,9 +1,5 @@
 import json
 
-# sys.stderr.write("--- RAW SEMGREP DATA START ---\n")
-# sys.stderr.write(json.dumps(self.findings, indent=2))
-# sys.stderr.write("\n--- RAW SEMGREP DATA END ---\n")
-
 class Semgrep: 
     def __init__(self):
         self.json_file_path = "/Users/prooijendijk/Documents/explainify/IDE_tool/explainify/scripts/semgrep_temp_results.json"
