@@ -89,8 +89,27 @@ def run_semgrep(target_file):
     except Exception as e:
         sys.stderr.write(f"Semgrep Error: {str(e)}\n")
         return []
+    
+def extract_code_context(base_path, relative_path, start_line, end_line):
+    if os.path.isfile(base_path):
+        file_to_open = base_path
+    else: 
+        file_to_open = os.path.join(base_path, relative_path)
+    
+    try: 
+        with open(file_to_open, 'r', encoding='utf-8', errors='replace') as f: 
+            lines = f.readlines()
+        
+        context_start = max(0, start_line - 5)
+        context_end = min(len(lines), end_line + 2)
+        return "".join(lines[context_start:context_end])
+    except Exception: 
+        return "Could not read source file."
 
 if __name__ == "__main__":  
+    if len(sys.argv) < 2:
+        sys.exit(1)
+
     target_file_path = sys.argv[1]
     findings = run_semgrep(target_file_path)
 
@@ -110,8 +129,7 @@ if __name__ == "__main__":
         for finding in results_list[file]:
             start = finding['start_line']['line']
             end = finding['end_line']['line']
-            code_snippet = all_lines[max(0, start - 3) : end + 2] # Getting some more context before and after
-            code_snippet = "".join(code_snippet)
+            code_snippet = extract_code_context(target_file_path, file, start, end)
 
             # Constructing the user and system prompts
             user_prompt = SYSTEM_TEMPLATE.format(

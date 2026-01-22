@@ -1,0 +1,7 @@
+{
+  "name": "Explainify Bright Warnings",
+  "type": "dark",
+  "colors": {
+    "editorWarning.foreground": "#FFFF00"
+  }
+}
