@@ -6,6 +6,7 @@ import logging
 import Semgrep
 from google import genai
 from dotenv import load_dotenv
+from typing import List
 
 load_dotenv()
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -61,10 +62,12 @@ def call_gemini(system_prompt: str, user_prompt: str) -> str:
         logger.error(f"Error generating response from Gemini: {str(e)}")
         return "Error generating explanation from AI."
 
-def run_semgrep(target_file):
+def run_semgrep(target_file: str) -> List:
     # Using full path to the output file, otherwise it's safed somewhere else
-    output_file = "/Users/prooijendijk/Documents/explainify/IDE_tool/explainify/scripts/semgrep_temp_results.json"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_file = os.path.join(script_dir, "semgrep_temp_results.json")
     
+    # Commands used to run Semgrep
     cmd = [
         "/opt/homebrew/bin/semgrep", "scan",
         "--config=auto",
@@ -76,21 +79,20 @@ def run_semgrep(target_file):
     ]
 
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        subprocess.run(cmd, capture_output=True, text=True)
 
         if not os.path.exists(output_file):
             return []
 
         with open(output_file, 'r') as f:
-            data = json.load(f)
-        # os.remove(output_file)      
+            data = json.load(f)      
         return data.get('results', [])
         
     except Exception as e:
         sys.stderr.write(f"Semgrep Error: {str(e)}\n")
         return []
     
-def extract_code_context(base_path, relative_path, start_line, end_line):
+def extract_code_context(base_path: str, relative_path: str, start_line: int, end_line: int) -> str:
     if os.path.isfile(base_path):
         file_to_open = base_path
     else: 
@@ -140,8 +142,8 @@ if __name__ == "__main__":
             )
             
             system_prompt = f"You are a security analyst or expert analyzing a code change."
+            # Calling the LLM
             explanation = call_gemini(system_prompt, user_prompt).lstrip()
-            print(explanation)
 
             # This checks if the file name is already in the final results
             if file not in explanations:
@@ -156,8 +158,7 @@ if __name__ == "__main__":
                     "vulnerability": finding['vuln_ids']
                 }
             )
-
-        with open("/Users/prooijendijk/Documents/explainify/IDE_tool/explainify/scripts/semgrep_explanations.json", "w") as f: 
-            json.dump(explanations, f, indent=4)
-            
+    
+    # Printing this ensures that the typescript file gets the explanations
     print(json.dumps(explanations, indent=2))
+    sm.delete_semgrep_file()

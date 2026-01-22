@@ -1,17 +1,16 @@
 import json
-
-# sys.stderr.write("--- RAW SEMGREP DATA START ---\n")
-# sys.stderr.write(json.dumps(self.findings, indent=2))
-# sys.stderr.write("\n--- RAW SEMGREP DATA END ---\n")
+import os
 
 class Semgrep: 
     def __init__(self):
-        self.json_file_path = "/Users/prooijendijk/Documents/explainify/IDE_tool/explainify/scripts/semgrep_temp_results.json"
+        # Getting the absolute path to the semgrep results file
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.json_file_path = os.path.join(script_dir, "semgrep_temp_results.json")
 
         with open(self.json_file_path, 'r', encoding='utf-8') as f:
             self.data = json.load(f)
 
-    def set_results(self):
+    def set_results(self) -> None:
         self.result_list = {}
 
         for result in self.data['results']:
@@ -29,3 +28,7 @@ class Semgrep:
 
             # Saving it to a dictionary
             self.result_list[file_name].append(finding_details)
+
+    # Helper function for ensuring the temporary semgrep file is deleted
+    def delete_semgrep_file(self) -> None:
+        os.remove(self.json_file_path)
